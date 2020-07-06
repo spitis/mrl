@@ -1,0 +1,3 @@
+python experiments/mega/train_mega.py --env HandManipulateBlock-v0  --env_max_step 100 --tb OMEGA_CUTOFF --optimize_every 20 --max_steps 40000000 --seed 1 --ag_curiosity minkde --replay_size 20000000 --her rfaab_1_5_2_1_1 --batch_size 16000 --transition_to_dg
+python experiments/mega/train_mega.py --env HandManipulateBlock-v0  --env_max_step 100 --tb OMEGA_CUTOFF --optimize_every 20 --max_steps 40000000 --seed 2 --ag_curiosity minkde --replay_size 20000000 --her rfaab_1_5_2_1_1 --batch_size 16000 --transition_to_dg
+python experiments/mega/train_mega.py --env HandManipulateBlock-v0  --env_max_step 100 --tb OMEGA_CUTOFF --optimize_every 20 --max_steps 40000000 --seed 3 --ag_curiosity minkde --replay_size 20000000 --her rfaab_1_5_2_1_1 --batch_size 16000 --transition_to_dg

@@ -1,0 +1,17 @@
+parallel python experiments/benchmarks/train_her.py --env FetchReach-v1 --seed {} --num_envs 8 --parent_folder ./results --max_steps 50000 ::: 1 2 3
+parallel python experiments/benchmarks/train_her.py --env FetchPush-v1 --seed {} --num_envs 8 --parent_folder ./results ::: 1 2 3
+parallel python experiments/benchmarks/train_her.py --env FetchPickAndPlace-v1 --seed {} --num_envs 8 --parent_folder ./results ::: 1 2 3
+parallel python experiments/benchmarks/train_her.py --env FetchSlide-v1 --seed {} --num_envs 8 --parent_folder ./results --max_steps 2500000 ::: 1 2 3
+parallel python experiments/benchmarks/train_her.py --env FetchReach-v1 --seed {} --num_envs 8 --parent_folder ./results --max_steps 50000 --her future_4 ::: 1 2 3
+parallel python experiments/benchmarks/train_her.py --env FetchPush-v1 --seed {} --num_envs 8 --parent_folder ./results --her future_4 ::: 1 2 3
+parallel python experiments/benchmarks/train_her.py --env FetchPickAndPlace-v1 --seed {} --num_envs 8 --parent_folder ./results --her future_4 ::: 1 2 3
+parallel python experiments/benchmarks/train_her.py --env FetchSlide-v1 --seed {} --num_envs 8 --parent_folder ./results --max_steps 2500000 --her future_4 ::: 1 2 3
+python experiments/benchmarks/train_her.py --env HandManipulateBlock-v0 --env_max_step 100 --seed 1 --num_envs 8 --parent_folder ./results --replay_size 10000000 --optimize_every 100 --batch_size 16000 --max_steps 40000000 --warm_up 5000
+python experiments/benchmarks/train_her.py --env HandManipulateBlock-v0 --env_max_step 100 --seed 2 --num_envs 8 --parent_folder ./results --replay_size 10000000 --optimize_every 100 --batch_size 16000 --max_steps 40000000 --warm_up 5000
+python experiments/benchmarks/train_her.py --env HandManipulateBlock-v0 --env_max_step 100 --seed 3 --num_envs 8 --parent_folder ./results --replay_size 10000000 --optimize_every 100 --batch_size 16000 --max_steps 40000000 --warm_up 5000
+python experiments/benchmarks/train_her.py --env HandManipulatePen-v0  --env_max_step 100 --seed 1 --num_envs 8 --parent_folder ./results --replay_size 10000000 --optimize_every 100 --batch_size 16000 --max_steps 40000000 --warm_up 5000
+python experiments/benchmarks/train_her.py --env HandManipulatePen-v0  --env_max_step 100 --seed 2 --num_envs 8 --parent_folder ./results --replay_size 10000000 --optimize_every 100 --batch_size 16000 --max_steps 40000000 --warm_up 5000
+python experiments/benchmarks/train_her.py --env HandManipulatePen-v0  --env_max_step 100 --seed 3 --num_envs 8 --parent_folder ./results --replay_size 10000000 --optimize_every 100 --batch_size 16000 --max_steps 40000000 --warm_up 5000
+python experiments/benchmarks/train_her.py --env HandManipulateEgg-v0  --env_max_step 100 --seed 1 --num_envs 8 --parent_folder ./results --replay_size 10000000 --optimize_every 100 --batch_size 16000 --max_steps 40000000 --warm_up 5000
+python experiments/benchmarks/train_her.py --env HandManipulateEgg-v0  --env_max_step 100 --seed 2 --num_envs 8 --parent_folder ./results --replay_size 10000000 --optimize_every 100 --batch_size 16000 --max_steps 40000000 --warm_up 5000
+python experiments/benchmarks/train_her.py --env HandManipulateEgg-v0  --env_max_step 100 --seed 3 --num_envs 8 --parent_folder ./results --replay_size 10000000 --optimize_every 100 --batch_size 16000 --max_steps 40000000 --warm_up 5000

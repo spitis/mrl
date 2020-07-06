@@ -1,0 +1,15 @@
+parallel python experiments/benchmarks/train_mujoco.py --alg sac --tb MUJOCO --env HalfCheetah-v3 --seed {} --num_envs 4 --parent_folder ./results ::: 1 2 3
+parallel python experiments/benchmarks/train_mujoco.py --alg sac --tb MUJOCO --env Hopper-v3 --seed {} --num_envs 4 --parent_folder ./results ::: 1 2 3
+parallel python experiments/benchmarks/train_mujoco.py --alg sac --tb MUJOCO --env Walker2d-v3 --seed {} --num_envs 4 --parent_folder ./results ::: 1 2 3
+parallel python experiments/benchmarks/train_mujoco.py --alg sac --tb MUJOCO --env Ant-v3 --seed {} --num_envs 4 --parent_folder ./results ::: 1 2 3
+parallel python experiments/benchmarks/train_mujoco.py --alg sac --tb MUJOCO --env Humanoid-v3 --seed {} --num_envs 4 --parent_folder ./results ::: 1 2 3
+parallel python experiments/benchmarks/train_mujoco.py --alg sac --tb MUJOCO --env HalfCheetah-v3 --seed {} --num_envs 4 --parent_folder ./results ::: 4 5 6
+parallel python experiments/benchmarks/train_mujoco.py --alg sac --tb MUJOCO --env Hopper-v3 --seed {} --num_envs 4 --parent_folder ./results ::: 4 5 6
+parallel python experiments/benchmarks/train_mujoco.py --alg sac --tb MUJOCO --env Walker2d-v3 --seed {} --num_envs 4 --parent_folder ./results ::: 4 5 6
+parallel python experiments/benchmarks/train_mujoco.py --alg sac --tb MUJOCO --env Ant-v3 --seed {} --num_envs 4 --parent_folder ./results ::: 4 5 6
+parallel python experiments/benchmarks/train_mujoco.py --alg sac --tb MUJOCO --env Humanoid-v3 --seed {} --num_envs 4 --parent_folder ./results ::: 4 5 6
+parallel python experiments/benchmarks/train_mujoco.py --alg td3 --tb MUJOCO --env HalfCheetah-v3 --seed {} --num_envs 4 --parent_folder ./results ::: 1 2 3
+parallel python experiments/benchmarks/train_mujoco.py --alg td3 --tb MUJOCO --env Hopper-v3 --seed {} --num_envs 4 --parent_folder ./results --layers 512 512 ::: 1 2 3
+parallel python experiments/benchmarks/train_mujoco.py --alg td3 --tb MUJOCO --env Walker2d-v3 --seed {} --num_envs 4 --parent_folder ./results --layers 512 512 ::: 1 2 3
+parallel python experiments/benchmarks/train_mujoco.py --alg td3 --tb MUJOCO --env Ant-v3 --seed {} --num_envs 4 --parent_folder ./results ::: 1 2 3
+parallel python experiments/benchmarks/train_mujoco.py --alg td3 --tb MUJOCO --env Humanoid-v3 --seed {} --num_envs 4 --parent_folder ./results ::: 1 2 3

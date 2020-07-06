@@ -1,0 +1,12 @@
+python experiments/mega/train_mega.py --env pointmaze --tb HER --max_steps 2500000 --seed 111 --first_visit_succ --replay_size 2500000 --save_embeddings --save_replay_buf
+python experiments/mega/train_mega.py --env pointmaze --tb HER --max_steps 2500000 --seed 222 --first_visit_succ --replay_size 2500000 --save_replay_buf
+python experiments/mega/train_mega.py --env pointmaze --tb HER --max_steps 2500000 --seed 333 --first_visit_succ --replay_size 2500000 --save_replay_buf
+python experiments/mega/train_mega.py --env pointmaze --tb MIN_DENSITY --max_steps 2500000 --seed 111 --first_visit_succ --ag_curiosity minkde --replay_size 2500000 --save_embeddings --save_replay_buf
+python experiments/mega/train_mega.py --env pointmaze --tb MIN_DENSITY --max_steps 2500000 --seed 222 --first_visit_succ --ag_curiosity minkde --replay_size 2500000 --save_replay_buf
+python experiments/mega/train_mega.py --env pointmaze --tb MIN_DENSITY --max_steps 2500000 --seed 333 --first_visit_succ --ag_curiosity minkde --replay_size 2500000 --save_replay_buf
+python experiments/mega/train_mega.py --env pointmaze --tb MIN_DENSITY_TRANSITION --max_steps 2500000 --seed 111 --first_visit_succ --ag_curiosity minkde --replay_size 2500000 --save_embeddings  --transition_to_dg --save_replay_buf
+python experiments/mega/train_mega.py --env pointmaze --tb MIN_DENSITY_TRANSITION --max_steps 2500000 --seed 222 --first_visit_succ --ag_curiosity minkde --replay_size 2500000 --transition_to_dg --save_replay_buf
+python experiments/mega/train_mega.py --env pointmaze --tb MIN_DENSITY_TRANSITION --max_steps 2500000 --seed 333 --first_visit_succ --ag_curiosity minkde --replay_size 2500000 --transition_to_dg --save_replay_buf
+python experiments/mega/train_mega.py --env pointmaze --tb SKEWFIT --max_steps 2500000 --seed 111 --first_visit_succ --ag_curiosity randkde --replay_size 2500000 --save_embeddings --save_replay_buf
+python experiments/mega/train_mega.py --env pointmaze --tb SKEWFIT --max_steps 2500000 --seed 222 --first_visit_succ --ag_curiosity randkde --replay_size 2500000 --save_replay_buf
+python experiments/mega/train_mega.py --env pointmaze --tb SKEWFIT --max_steps 2500000 --seed 333 --first_visit_succ --ag_curiosity randkde --replay_size 2500000 --save_replay_buf

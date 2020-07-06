@@ -1,0 +1,10 @@
+python experiments/mega/train_mega.py --env pointmaze --tb EG_CONDKDE2 --max_steps 2500000 --seed 111 --first_visit_succ --ag_curiosity entropygainscore --save_embeddings --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb EG_CONDKDE2 --max_steps 2500000 --seed 222 --first_visit_succ --ag_curiosity entropygainscore --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb EG_CONDKDE2 --max_steps 2500000 --seed 333 --first_visit_succ --ag_curiosity entropygainscore --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb EG_CONDKDE2 --max_steps 2500000 --seed 444 --first_visit_succ --ag_curiosity entropygainscore --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb EG_CONDKDE2 --max_steps 2500000 --seed 555 --first_visit_succ --ag_curiosity entropygainscore --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb EG_CONDKDE2_TRANSITION --max_steps 2500000 --seed 111 --first_visit_succ --ag_curiosity entropygainscore --save_embeddings --replay_size 2500000 --transition_to_dg
+python experiments/mega/train_mega.py --env pointmaze --tb EG_CONDKDE2_TRANSITION --max_steps 2500000 --seed 222 --first_visit_succ --ag_curiosity entropygainscore --replay_size 2500000 --transition_to_dg
+python experiments/mega/train_mega.py --env pointmaze --tb EG_CONDKDE2_TRANSITION --max_steps 2500000 --seed 333 --first_visit_succ --ag_curiosity entropygainscore --replay_size 2500000 --transition_to_dg
+python experiments/mega/train_mega.py --env pointmaze --tb EG_CONDKDE2_TRANSITION --max_steps 2500000 --seed 444 --first_visit_succ --ag_curiosity entropygainscore --replay_size 2500000 --transition_to_dg
+python experiments/mega/train_mega.py --env pointmaze --tb EG_CONDKDE2_TRANSITION --max_steps 2500000 --seed 555 --first_visit_succ --ag_curiosity entropygainscore --replay_size 2500000 --transition_to_dg

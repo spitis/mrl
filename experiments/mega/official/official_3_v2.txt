@@ -1,0 +1,6 @@
+python experiments/mega/train_mega.py --env pointmaze --tb PM --max_steps 1000000 --seed 111 --first_visit_succ --ag_curiosity minrnd --save_embeddings
+python experiments/mega/train_mega.py --env pointmaze --tb PM --max_steps 1000000 --seed 222 --first_visit_succ --ag_curiosity minrnd
+python experiments/mega/train_mega.py --env pointmaze --tb PM --max_steps 1000000 --seed 333 --first_visit_succ --ag_curiosity minrnd
+python experiments/mega/train_mega.py --env pointmaze --tb PM --max_steps 1000000 --seed 111 --first_visit_succ --ag_curiosity goaldisc --save_embeddings
+python experiments/mega/train_mega.py --env pointmaze --tb PM --max_steps 1000000 --seed 222 --first_visit_succ --ag_curiosity goaldisc
+python experiments/mega/train_mega.py --env pointmaze --tb PM --max_steps 1000000 --seed 333 --first_visit_succ --ag_curiosity goaldisc

@@ -1,0 +1,95 @@
+# POINTMAZE
+
+python experiments/mega/train_mega.py --env pointmaze --tb PM --max_steps 1000000 --seed 111 --first_visit_succ --save_embeddings
+python experiments/mega/train_mega.py --env pointmaze --tb PM --max_steps 1000000 --seed 222 --first_visit_succ
+python experiments/mega/train_mega.py --env pointmaze --tb PM --max_steps 1000000 --seed 333 --first_visit_succ
+python experiments/mega/train_mega.py --env pointmaze --tb PM --max_steps 1000000 --seed 111 --first_visit_succ --ag_curiosity minkde --save_embeddings
+python experiments/mega/train_mega.py --env pointmaze --tb PM --max_steps 1000000 --seed 222 --first_visit_succ --ag_curiosity minkde
+python experiments/mega/train_mega.py --env pointmaze --tb PM --max_steps 1000000 --seed 333 --first_visit_succ --ag_curiosity minkde
+python experiments/mega/train_mega.py --env pointmaze --tb PM --max_steps 1000000 --seed 111 --first_visit_succ --ag_curiosity randkde --save_embeddings
+python experiments/mega/train_mega.py --env pointmaze --tb PM --max_steps 1000000 --seed 222 --first_visit_succ --ag_curiosity randkde
+python experiments/mega/train_mega.py --env pointmaze --tb PM --max_steps 1000000 --seed 333 --first_visit_succ --ag_curiosity randkde
+python experiments/mega/train_mega.py --env pointmaze --tb PM --max_steps 1000000 --seed 111 --first_visit_succ --ag_curiosity randkde --alpha 0. --save_embeddings
+python experiments/mega/train_mega.py --env pointmaze --tb PM --max_steps 1000000 --seed 222 --first_visit_succ --ag_curiosity randkde --alpha 0.
+python experiments/mega/train_mega.py --env pointmaze --tb PM --max_steps 1000000 --seed 333 --first_visit_succ --ag_curiosity randkde --alpha 0.
+python experiments/mega/train_mega.py --env pointmaze --tb PM --max_steps 1000000 --seed 111 --first_visit_succ --ag_curiosity minrnd --save_embeddings
+python experiments/mega/train_mega.py --env pointmaze --tb PM --max_steps 1000000 --seed 222 --first_visit_succ --ag_curiosity minrnd
+python experiments/mega/train_mega.py --env pointmaze --tb PM --max_steps 1000000 --seed 333 --first_visit_succ --ag_curiosity minrnd
+python experiments/mega/train_mega.py --env pointmaze --tb PM --max_steps 1000000 --seed 111 --first_visit_succ --ag_curiosity goaldisc --save_embeddings
+python experiments/mega/train_mega.py --env pointmaze --tb PM --max_steps 1000000 --seed 222 --first_visit_succ --ag_curiosity goaldisc
+python experiments/mega/train_mega.py --env pointmaze --tb PM --max_steps 1000000 --seed 333 --first_visit_succ --ag_curiosity goaldisc
+
+
+# ANTMAZE
+
+python experiments/mega/train_mega.py --env antmaze --tb AM --optimize_every 2 --max_steps 10000000 --seed 111 --first_visit_succ --save_embeddings
+python experiments/mega/train_mega.py --env antmaze --tb AM --optimize_every 2 --max_steps 10000000 --seed 222 --first_visit_succ
+python experiments/mega/train_mega.py --env antmaze --tb AM --optimize_every 2 --max_steps 10000000 --seed 333 --first_visit_succ
+python experiments/mega/train_mega.py --env antmaze --tb AM --optimize_every 2 --max_steps 10000000 --seed 111 --first_visit_succ --ag_curiosity minkde --save_embeddings
+python experiments/mega/train_mega.py --env antmaze --tb AM --optimize_every 2 --max_steps 10000000 --seed 222 --first_visit_succ --ag_curiosity minkde
+python experiments/mega/train_mega.py --env antmaze --tb AM --optimize_every 2 --max_steps 10000000 --seed 333 --first_visit_succ --ag_curiosity minkde
+python experiments/mega/train_mega.py --env antmaze --tb AM --optimize_every 2 --max_steps 10000000 --seed 111 --first_visit_succ --ag_curiosity randkde --save_embeddings
+python experiments/mega/train_mega.py --env antmaze --tb AM --optimize_every 2 --max_steps 10000000 --seed 222 --first_visit_succ --ag_curiosity randkde
+python experiments/mega/train_mega.py --env antmaze --tb AM --optimize_every 2 --max_steps 10000000 --seed 333 --first_visit_succ --ag_curiosity randkde
+python experiments/mega/train_mega.py --env antmaze --tb AM --optimize_every 2 --max_steps 10000000 --seed 111 --first_visit_succ --ag_curiosity randkde --alpha 0. --save_embeddings
+python experiments/mega/train_mega.py --env antmaze --tb AM --optimize_every 2 --max_steps 10000000 --seed 222 --first_visit_succ --ag_curiosity randkde --alpha 0.
+python experiments/mega/train_mega.py --env antmaze --tb AM --optimize_every 2 --max_steps 10000000 --seed 333 --first_visit_succ --ag_curiosity randkde --alpha 0.
+---
+python experiments/mega/train_mega.py --env antmaze --tb AM --optimize_every 2 --max_steps 10000000 --seed 444 --first_visit_succ
+python experiments/mega/train_mega.py --env antmaze --tb AM --optimize_every 2 --max_steps 10000000 --seed 555 --first_visit_succ
+python experiments/mega/train_mega.py --env antmaze --tb AM --optimize_every 2 --max_steps 10000000 --seed 444 --first_visit_succ --ag_curiosity minkde
+python experiments/mega/train_mega.py --env antmaze --tb AM --optimize_every 2 --max_steps 10000000 --seed 555 --first_visit_succ --ag_curiosity minkde
+python experiments/mega/train_mega.py --env antmaze --tb AM --optimize_every 2 --max_steps 10000000 --seed 444 --first_visit_succ --ag_curiosity randkde
+python experiments/mega/train_mega.py --env antmaze --tb AM --optimize_every 2 --max_steps 10000000 --seed 555 --first_visit_succ --ag_curiosity randkde
+python experiments/mega/train_mega.py --env antmaze --tb AM --optimize_every 2 --max_steps 10000000 --seed 444 --first_visit_succ --ag_curiosity randkde --alpha 0.
+python experiments/mega/train_mega.py --env antmaze --tb AM --optimize_every 2 --max_steps 10000000 --seed 555 --first_visit_succ --ag_curiosity randkde --alpha 0.
+
+
+# FPP HARD
+
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 111 --save_embeddings
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 222
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 333
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 111 --ag_curiosity minkde --save_embeddings
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 222 --ag_curiosity minkde
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 333 --ag_curiosity minkde
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 111 --ag_curiosity randkde --save_embeddings
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 222 --ag_curiosity randkde
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 333 --ag_curiosity randkde
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 111 --ag_curiosity randkde --alpha 0. --save_embeddings
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 222 --ag_curiosity randkde --alpha 0.
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 333 --ag_curiosity randkde --alpha 0.
+---
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 444
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 555
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 444 --ag_curiosity minkde
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 555 --ag_curiosity minkde
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 444 --ag_curiosity randkde
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 555 --ag_curiosity randkde
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 444 --ag_curiosity randkde --alpha 0.
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 555 --ag_curiosity randkde --alpha 0.
+
+
+# STACK2
+
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb STK --optimize_every 8 --max_steps 10000000 --seed 111 --save_embeddings
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb STK --optimize_every 8 --max_steps 10000000 --seed 222
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb STK --optimize_every 8 --max_steps 10000000 --seed 333
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb STK --optimize_every 8 --max_steps 10000000 --seed 111 --ag_curiosity minkde --save_embeddings
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb STK --optimize_every 8 --max_steps 10000000 --seed 222 --ag_curiosity minkde
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb STK --optimize_every 8 --max_steps 10000000 --seed 333 --ag_curiosity minkde
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb STK --optimize_every 8 --max_steps 10000000 --seed 111 --ag_curiosity randkde --save_embeddings
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb STK --optimize_every 8 --max_steps 10000000 --seed 222 --ag_curiosity randkde
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb STK --optimize_every 8 --max_steps 10000000 --seed 333 --ag_curiosity randkde
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb STK --optimize_every 8 --max_steps 10000000 --seed 111 --ag_curiosity randkde --alpha 0. --save_embeddings
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb STK --optimize_every 8 --max_steps 10000000 --seed 222 --ag_curiosity randkde --alpha 0.
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb STK --optimize_every 8 --max_steps 10000000 --seed 333 --ag_curiosity randkde --alpha 0.
+---
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb STK --optimize_every 8 --max_steps 10000000 --seed 444
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb STK --optimize_every 8 --max_steps 10000000 --seed 555
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb STK --optimize_every 8 --max_steps 10000000 --seed 444 --ag_curiosity minkde
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb STK --optimize_every 8 --max_steps 10000000 --seed 555 --ag_curiosity minkde
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb STK --optimize_every 8 --max_steps 10000000 --seed 444 --ag_curiosity randkde
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb STK --optimize_every 8 --max_steps 10000000 --seed 555 --ag_curiosity randkde
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb STK --optimize_every 8 --max_steps 10000000 --seed 444 --ag_curiosity randkde --alpha 0.
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb STK --optimize_every 8 --max_steps 10000000 --seed 555 --ag_curiosity randkde --alpha 0.

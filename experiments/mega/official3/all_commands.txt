@@ -1,0 +1,68 @@
+# FPP HARD
+
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb HER --optimize_every 2 --max_steps 5000000 --seed 111 --save_embeddings  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb HER --optimize_every 2 --max_steps 5000000 --seed 222  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb HER --optimize_every 2 --max_steps 5000000 --seed 333  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb MIN_DENSITY --optimize_every 2 --max_steps 5000000 --seed 111 --ag_curiosity minkde --save_embeddings  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb MIN_DENSITY --optimize_every 2 --max_steps 5000000 --seed 222 --ag_curiosity minkde  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb MIN_DENSITY --optimize_every 2 --max_steps 5000000 --seed 333 --ag_curiosity minkde  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb MIN_DENSITY_TRANSITION --optimize_every 2 --max_steps 5000000 --seed 111 --ag_curiosity minkde --save_embeddings  --replay_size 5000000  --transition_to_dg
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb MIN_DENSITY_TRANSITION --optimize_every 2 --max_steps 5000000 --seed 222 --ag_curiosity minkde  --replay_size 5000000  --transition_to_dg
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb MIN_DENSITY_TRANSITION --optimize_every 2 --max_steps 5000000 --seed 333 --ag_curiosity minkde  --replay_size 5000000  --transition_to_dg
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb SKEWFIT --optimize_every 2 --max_steps 5000000 --seed 111 --ag_curiosity randkde --save_embeddings  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb SKEWFIT --optimize_every 2 --max_steps 5000000 --seed 222 --ag_curiosity randkde  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb SKEWFIT --optimize_every 2 --max_steps 5000000 --seed 333 --ag_curiosity randkde  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb DISCERN --optimize_every 2 --max_steps 5000000 --seed 111 --ag_curiosity randkde --alpha 0. --save_embeddings  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb DISCERN --optimize_every 2 --max_steps 5000000 --seed 222 --ag_curiosity randkde --alpha 0.  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb DISCERN --optimize_every 2 --max_steps 5000000 --seed 333 --ag_curiosity randkde --alpha 0.  --replay_size 5000000
+
+# FPP HARD - HER VS LONGNESS of HORIZON
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0. --pp_max_air 0.1 --tb SUCCLONGHOR0_HER --optimize_every 2 --max_steps 5000000 --seed 111 --save_embeddings  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0. --pp_max_air 0.1 --tb SUCCLONGHOR0_HER --optimize_every 2 --max_steps 5000000 --seed 222  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0. --pp_max_air 0.1 --tb SUCCLONGHOR0_HER --optimize_every 2 --max_steps 5000000 --seed 333  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.1 --pp_max_air 0.2 --tb SUCCLONGHOR1_HER --optimize_every 2 --max_steps 5000000 --seed 111 --save_embeddings  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.1 --pp_max_air 0.2 --tb SUCCLONGHOR1_HER --optimize_every 2 --max_steps 5000000 --seed 222  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.1 --pp_max_air 0.2 --tb SUCCLONGHOR1_HER --optimize_every 2 --max_steps 5000000 --seed 333  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.2 --pp_max_air 0.3 --tb SUCCLONGHOR2_HER --optimize_every 2 --max_steps 5000000 --seed 111 --save_embeddings  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.2 --pp_max_air 0.3 --tb SUCCLONGHOR2_HER --optimize_every 2 --max_steps 5000000 --seed 222  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.2 --pp_max_air 0.3 --tb SUCCLONGHOR2_HER --optimize_every 2 --max_steps 5000000 --seed 333  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.3 --pp_max_air 0.4 --tb SUCCLONGHOR3_HER --optimize_every 2 --max_steps 5000000 --seed 111 --save_embeddings  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.3 --pp_max_air 0.4 --tb SUCCLONGHOR3_HER --optimize_every 2 --max_steps 5000000 --seed 222  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.3 --pp_max_air 0.4 --tb SUCCLONGHOR3_HER --optimize_every 2 --max_steps 5000000 --seed 333  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.4 --pp_max_air 0.5 --tb SUCCLONGHOR3_HER --optimize_every 2 --max_steps 5000000 --seed 111 --save_embeddings  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.4 --pp_max_air 0.5 --tb SUCCLONGHOR3_HER --optimize_every 2 --max_steps 5000000 --seed 222  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.4 --pp_max_air 0.5 --tb SUCCLONGHOR3_HER --optimize_every 2 --max_steps 5000000 --seed 333  --replay_size 5000000
+
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0. --pp_max_air 0.1 --tb SUCCLONGHOR0_HER --optimize_every 2 --max_steps 5000000 --seed 111 --save_embeddings  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0. --pp_max_air 0.1 --tb SUCCLONGHOR0_HER --optimize_every 2 --max_steps 5000000 --seed 222  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0. --pp_max_air 0.1 --tb SUCCLONGHOR0_HER --optimize_every 2 --max_steps 5000000 --seed 333  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.1 --pp_max_air 0.2 --tb SUCCLONGHOR1_HER --optimize_every 2 --max_steps 5000000 --seed 111 --save_embeddings  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.1 --pp_max_air 0.2 --tb SUCCLONGHOR1_HER --optimize_every 2 --max_steps 5000000 --seed 222  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.1 --pp_max_air 0.2 --tb SUCCLONGHOR1_HER --optimize_every 2 --max_steps 5000000 --seed 333  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.2 --pp_max_air 0.3 --tb SUCCLONGHOR2_HER --optimize_every 2 --max_steps 5000000 --seed 111 --save_embeddings  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.2 --pp_max_air 0.3 --tb SUCCLONGHOR2_HER --optimize_every 2 --max_steps 5000000 --seed 222  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.2 --pp_max_air 0.3 --tb SUCCLONGHOR2_HER --optimize_every 2 --max_steps 5000000 --seed 333  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.3 --pp_max_air 0.4 --tb SUCCLONGHOR3_HER --optimize_every 2 --max_steps 5000000 --seed 111 --save_embeddings  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.3 --pp_max_air 0.4 --tb SUCCLONGHOR3_HER --optimize_every 2 --max_steps 5000000 --seed 222  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.3 --pp_max_air 0.4 --tb SUCCLONGHOR3_HER --optimize_every 2 --max_steps 5000000 --seed 333  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.4 --pp_max_air 0.5 --tb SUCCLONGHOR3_HER --optimize_every 2 --max_steps 5000000 --seed 111 --save_embeddings  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.4 --pp_max_air 0.5 --tb SUCCLONGHOR3_HER --optimize_every 2 --max_steps 5000000 --seed 222  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.4 --pp_max_air 0.5 --tb SUCCLONGHOR3_HER --optimize_every 2 --max_steps 5000000 --seed 333  --replay_size 5000000
+
+# STACK2
+
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb HER --optimize_every 10 --batch_size 4000 --max_steps 10000000 --seed 111 --save_embeddings --replay_size 10000000
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb HER --optimize_every 10 --batch_size 4000 --max_steps 10000000 --seed 222 --replay_size 10000000
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb HER --optimize_every 10 --batch_size 4000 --max_steps 10000000 --seed 333 --replay_size 10000000
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb MIN_DENSITY --optimize_every 10 --batch_size 4000 --max_steps 10000000 --seed 111 --ag_curiosity minkde --save_embeddings --replay_size 10000000
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb MIN_DENSITY --optimize_every 10 --batch_size 4000 --max_steps 10000000 --seed 222 --ag_curiosity minkde --replay_size 10000000
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb MIN_DENSITY --optimize_every 10 --batch_size 4000 --max_steps 10000000 --seed 333 --ag_curiosity minkde --replay_size 10000000
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb MIN_DENSITY_TRANSITION --optimize_every 10 --batch_size 4000 --max_steps 10000000 --seed 111 --ag_curiosity minkde --save_embeddings --replay_size 10000000 --transition_to_dg
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb MIN_DENSITY_TRANSITION --optimize_every 10 --batch_size 4000 --max_steps 10000000 --seed 222 --ag_curiosity minkde --replay_size 10000000 --transition_to_dg
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb MIN_DENSITY_TRANSITION --optimize_every 10 --batch_size 4000 --max_steps 10000000 --seed 333 --ag_curiosity minkde --replay_size 10000000 --transition_to_dg
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb SKEWFIT --optimize_every 10 --batch_size 4000 --max_steps 10000000 --seed 111 --ag_curiosity randkde --save_embeddings --replay_size 10000000
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb SKEWFIT --optimize_every 10 --batch_size 4000 --max_steps 10000000 --seed 222 --ag_curiosity randkde --replay_size 10000000
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb SKEWFIT --optimize_every 10 --batch_size 4000 --max_steps 10000000 --seed 333 --ag_curiosity randkde --replay_size 10000000
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb DISCERN --optimize_every 10 --batch_size 4000 --max_steps 10000000 --seed 111 --ag_curiosity randkde --alpha 0. --save_embeddings --replay_size 10000000
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb DISCERN --optimize_every 10 --batch_size 4000 --max_steps 10000000 --seed 222 --ag_curiosity randkde --alpha 0. --replay_size 10000000
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb DISCERN --optimize_every 10 --batch_size 4000 --max_steps 10000000 --seed 333 --ag_curiosity randkde --alpha 0. --replay_size 10000000

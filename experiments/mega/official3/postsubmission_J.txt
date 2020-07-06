@@ -1,0 +1,2 @@
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb MINQ --optimize_every 4 --max_steps 5000000 --seed 111 --ag_curiosity minq --save_embeddings  --replay_size 5000000 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb GOALDISC --optimize_every 4 --max_steps 5000000 --seed 111 --ag_curiosity goaldisc --save_embeddings  --replay_size 5000000 --her rfaab_1_5_2_1_1

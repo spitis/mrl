@@ -1,0 +1,6 @@
+python experiments/mega/train_mega.py --env pointmaze --tb HER --max_steps 2500000 --seed 444 --first_visit_succ --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb HER --max_steps 2500000 --seed 555 --first_visit_succ --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb MIN_DENSITY --max_steps 2500000 --seed 444 --first_visit_succ --ag_curiosity minkde --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb MIN_DENSITY --max_steps 2500000 --seed 555 --first_visit_succ --ag_curiosity minkde --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb MIN_DENSITY_TRANSITION --max_steps 2500000 --seed 444 --first_visit_succ --ag_curiosity minkde --replay_size 2500000 --transition_to_dg
+python experiments/mega/train_mega.py --env pointmaze --tb MIN_DENSITY_TRANSITION --max_steps 2500000 --seed 555 --first_visit_succ --ag_curiosity minkde --replay_size 2500000 --transition_to_dg

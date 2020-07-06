@@ -1,0 +1,8 @@
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 444
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 555
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 444 --ag_curiosity minkde
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 555 --ag_curiosity minkde
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 444 --ag_curiosity randkde
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 555 --ag_curiosity randkde
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 444 --ag_curiosity randkde --alpha 0.
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FPP --optimize_every 4 --max_steps 2500000 --seed 555 --ag_curiosity randkde --alpha 0.

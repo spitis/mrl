@@ -1,0 +1,2 @@
+python experiments/mega/train_mega.py --env antmaze --tb MIN_DENSITY --optimize_every 2 --max_steps 5000000 --seed 111 --first_visit_succ --ag_curiosity minkde --gamma 0.99 --replay_size 5000000 --env_max_step 500 
+python experiments/mega/train_mega.py --env antmaze_gg --tb MIN_DENSITY --optimize_every 2 --max_steps 5000000 --seed 111 --first_visit_succ --ag_curiosity minkde --gamma 0.99 --replay_size 5000000 --env_max_step 500 

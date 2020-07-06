@@ -1,0 +1,6 @@
+python experiments/mega/train_mega.py --env pointmaze --tb GOALGAN --max_steps 2500000 --seed 111 --first_visit_succ --ag_curiosity goaldisc --replay_size 2500000 --save_embeddings
+python experiments/mega/train_mega.py --env pointmaze --tb GOALGAN --max_steps 2500000 --seed 222 --first_visit_succ --ag_curiosity goaldisc --replay_size 2500000 
+python experiments/mega/train_mega.py --env pointmaze --tb GOALGAN --max_steps 2500000 --seed 333 --first_visit_succ --ag_curiosity goaldisc --replay_size 2500000 
+python experiments/mega/train_mega.py --env pointmaze --tb MIN_Q --max_steps 2500000 --seed 111 --first_visit_succ --ag_curiosity minq --replay_size 2500000 --save_embeddings
+python experiments/mega/train_mega.py --env pointmaze --tb MIN_Q --max_steps 2500000 --seed 222 --first_visit_succ --ag_curiosity minq --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb MIN_Q --max_steps 2500000 --seed 333 --first_visit_succ --ag_curiosity minq --replay_size 2500000

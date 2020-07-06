@@ -1,0 +1,8 @@
+python experiments/mega/train_mega.py --env pointmaze --num_envs 3 --ag_curiosity minkde --tb RS_0.3_exponential --her rfaab_1_4_3_1_1 --max_steps 500000 --seed 29 --first_visit_succ --bandwidth 0.3 --kde_kernel exponential
+python experiments/mega/train_mega.py --env pointmaze --num_envs 3 --ag_curiosity minkde --tb RS_0.1_exponential --her rfaab_1_4_3_1_1 --max_steps 500000 --seed 29 --first_visit_succ --bandwidth 0.1 --kde_kernel exponential
+python experiments/mega/train_mega.py --env pointmaze --num_envs 3 --ag_curiosity minkde --tb RS_0.2_exponential --her rfaab_1_4_3_1_1 --max_steps 500000 --seed 29 --first_visit_succ --bandwidth 0.2 --kde_kernel exponential
+python experiments/mega/train_mega.py --env pointmaze --num_envs 3 --ag_curiosity minkde --tb RS_0.05_exponential --her rfaab_1_4_3_1_1 --max_steps 500000 --seed 29 --first_visit_succ --bandwidth 0.05 --kde_kernel exponential
+python experiments/mega/train_mega.py --env pointmaze --num_envs 3 --ag_curiosity minkde --tb RS_0.3_gaussian --her rfaab_1_4_3_1_1 --max_steps 500000 --seed 29 --first_visit_succ --bandwidth 0.3 --kde_kernel gaussian
+python experiments/mega/train_mega.py --env pointmaze --num_envs 3 --ag_curiosity minkde --tb RS_0.2_gaussian --her rfaab_1_4_3_1_1 --max_steps 500000 --seed 29 --first_visit_succ --bandwidth 0.2 --kde_kernel gaussian
+python experiments/mega/train_mega.py --env pointmaze --num_envs 3 --ag_curiosity minkde --tb RS_0.05_gaussian --her rfaab_1_4_3_1_1 --max_steps 500000 --seed 29 --first_visit_succ --bandwidth 0.05 --kde_kernel gaussian
+python experiments/mega/train_mega.py --env pointmaze --num_envs 3 --ag_curiosity minkde --tb RS_0.1_gaussian --her rfaab_1_4_3_1_1 --max_steps 500000 --seed 29 --first_visit_succ --bandwidth 0.1 --kde_kernel gaussian

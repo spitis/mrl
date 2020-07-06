@@ -1,0 +1,5 @@
+python experiments/mega/train_mega.py --env pointmaze --tb MIN_FLOWZ --max_steps 2500000 --seed 111 --first_visit_succ --ag_curiosity minflow --replay_size 2500000 --save_embeddings
+python experiments/mega/train_mega.py --env pointmaze --tb MIN_FLOWZ --max_steps 2500000 --seed 222 --first_visit_succ --ag_curiosity minflow --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb MIN_FLOWZ --max_steps 2500000 --seed 333 --first_visit_succ --ag_curiosity minflow --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb MIN_FLOWZ --max_steps 2500000 --seed 444 --first_visit_succ --ag_curiosity minflow --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb MIN_FLOWZ --max_steps 2500000 --seed 555 --first_visit_succ --ag_curiosity minflow --replay_size 2500000

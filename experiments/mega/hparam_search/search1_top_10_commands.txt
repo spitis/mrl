@@ -1,0 +1,28 @@
+61 python experiments/mega/train_mega.py --env pointmaze --num_envs 3 --ag_curiosity minkde --tb RS_61 --her rfaab_1_4_3_1_1 --max_steps 500000 --seed 32 --eexplore 0.1 --alg ddpg --batch_size 2000 --optimize_every 1 --go_eexplore 0.2 --action_noise 0.1 --warm_up 10000 --first_visit_succ
+
+56 python experiments/mega/train_mega.py --env pointmaze --num_envs 3 --ag_curiosity minkde --tb RS_56 --her rfaab_1_4_3_1_1 --max_steps 500000 --seed 32 --eexplore 0.2 --alg ddpg --batch_size 2000 --optimize_every 1 --go_eexplore 0.1 --action_noise 0.1 --warm_up 5000 --first_visit_succ
+
+11 python experiments/mega/train_mega.py --env pointmaze --num_envs 3 --ag_curiosity minkde --tb RS_11 --her rfaab_1_4_3_1_1 --max_steps 500000 --seed 32 --eexplore 0.3 --alg ddpg --batch_size 2000 --optimize_every 1 --go_eexplore 0.1 --action_noise 0.1 --warm_up 5000 --first_visit_succ
+
+94 python experiments/mega/train_mega.py --env pointmaze --num_envs 3 --ag_curiosity minkde --tb RS_94 --her rfaab_1_4_3_1_1 --max_steps 500000 --seed 32 --eexplore 0.1 --alg ddpg --batch_size 4000 --optimize_every 1 --go_eexplore 0.05 --action_noise 0.1 --warm_up 5000 --first_visit_succ
+
+87 python experiments/mega/train_mega.py --env pointmaze --num_envs 3 --ag_curiosity minkde --tb RS_87 --her rfaab_1_4_3_1_1 --max_steps 500000 --seed 32 --eexplore 0.2 --alg ddpg --batch_size 2000 --optimize_every 1 --go_eexplore 0.1 --action_noise 0.1 --warm_up 10000 --first_visit_succ
+
+85 python experiments/mega/train_mega.py --env pointmaze --num_envs 3 --ag_curiosity minkde --tb RS_85 --her rfaab_1_4_3_1_1 --max_steps 500000 --seed 32 --eexplore 0.1 --alg ddpg --batch_size 4000 --optimize_every 1 --go_eexplore 0.2 --action_noise 0.2 --warm_up 2500 --first_visit_succ
+
+44 python experiments/mega/train_mega.py --env pointmaze --num_envs 3 --ag_curiosity minkde --tb RS_44 --her rfaab_1_4_3_1_1 --max_steps 500000 --seed 32 --eexplore 0.3 --alg ddpg --batch_size 1000 --optimize_every 1 --go_eexplore 0.02 --action_noise 0.2 --warm_up 5000 --first_visit_succ
+
+7 python experiments/mega/train_mega.py --env pointmaze --num_envs 3 --ag_curiosity minkde --tb RS_7 --her rfaab_1_4_3_1_1 --max_steps 500000 --seed 32 --eexplore 0.1 --alg ddpg --batch_size 2000 --optimize_every 1 --go_eexplore 0.05 --action_noise 0.1 --warm_up 2500 --first_visit_succ
+
+79 python experiments/mega/train_mega.py --env pointmaze --num_envs 3 --ag_curiosity minkde --tb RS_79 --her rfaab_1_4_3_1_1 --max_steps 500000 --seed 32 --eexplore 0.1 --alg td3 --batch_size 4000 --optimize_every 1 --go_eexplore 0.1 --action_noise 0.1 --warm_up 5000 --first_visit_succ
+
+13 python experiments/mega/train_mega.py --env pointmaze --num_envs 3 --ag_curiosity minkde --tb RS_13 --her rfaab_1_4_3_1_1 --max_steps 500000 --seed 32 --eexplore 0.1 --alg ddpg --batch_size 4000 --optimize_every 2 --go_eexplore 0.02 --action_noise 0.2 --warm_up 2500 --first_visit_succ
+
+so:
+warm_up 5000
+action_noise 0.1
+go_eexplore 0.1
+batch_size 2000
+opt_every 1
+ddpg
+eexplore 0.1

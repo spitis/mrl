@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mujoco>
+	<compiler angle="radian" coordinate="local" meshdir="../stls/fetch" texturedir="../textures"></compiler>
+	<option timestep="0.002">
+		<flag warmstart="enable"></flag>
+	</option>
+
+	<include file="shared_blackbot.xml"></include>
+	
+	<worldbody>
+		<geom name="floor0" pos="0.8 0.75 0" size="0.85 0.70 1" type="plane" condim="3" material="floor_mat"></geom>
+		<body name="floor0" pos="0.8 0.75 0">
+			<site name="target0" pos="0 0 0.5" size="0.02 0.02 0.02" rgba="0 0 0.4 0.4" type="sphere"></site>
+			<site name="target1" pos="0 0 0.5" size="0.02 0.02 0.02" rgba="0.4 0 0 0.4" type="sphere"></site>
+			<site name="target2" pos="0 0 0.5" size="0.02 0.02 0.02" rgba="0.6 0.4 0.1 0.4" type="sphere"></site>
+			<site name="target3" pos="0 0 0.5" size="0.02 0.02 0.02" rgba="0.7 0.3 0.51 0.4" type="sphere"></site>
+			<site name="target4" pos="0 0 0.5" size="0.02 0.02 0.02" rgba="0.2 0.6 0.5 0.4" type="sphere"></site>
+		</body>
+
+		<include file="robot2.xml"></include>
+
+		<body pos="1. 0.75 0.4" name="table0">
+			<geom size="0.35 0.35 0.01" type="plane" condim="3" friction="0.03 0.0025 0.0001" material="table_mat"></geom>
+      <site name="dummy_table" size="0.365 0.365 0.2" pos="0 0 -0.2" type="box" material="table_mat"></site>
+		</body>
+		<body pos="0.66 0.75 0.45" name="barrier0">
+			<geom size="0.01 0.35 0.05" type="box" mass="2000" rgba="0 0 0 0.3" material="table_mat"></geom>
+		</body>
+		<body pos="1.34 0.75 0.45" name="barrier1">
+			<geom size="0.01 0.35 0.05" type="box" mass="2000" rgba="0 0 0 0.3" material="table_mat"></geom>
+		</body>
+		<body pos="1. 0.41 0.45" name="barrier2">
+			<geom size="0.33 0.01 0.05" type="box" mass="2000" rgba="0 0 0 0.3" material="table_mat"></geom>
+		</body>
+		<body pos="1. 1.09 0.45" name="barrier3">
+			<geom size="0.33 0.01 0.05" type="box" mass="2000" rgba="0 0 0 0.3" material="table_mat"></geom>
+		</body>
+
+		<body name="object0" pos="0.025 0.025 0.02">
+			<joint name="object0:joint" type="free" damping="0.01"></joint>
+			<geom size="0.025 0.02" type="cylinder" condim="3" name="object0" material="puck_mat" friction="0.03 0.0025 0.0001" mass="5"></geom>
+			<site name="object0" pos="0 0 0.023" size="0.025 0.003" material="puck_mat1" type="cylinder"></site>
+		</body>
+		<body name="object1" pos="0.025 0.025 0.02">
+			<joint name="object1:joint" type="free" damping="0.01"></joint>
+			<geom size="0.025 0.02" type="cylinder" condim="3" name="object1" material="puck_mat" friction="0.03 0.0025 0.0001" mass="5"></geom>
+			<site name="object1" pos="0 0 0.023" size="0.025 0.003" material="puck_mat2" type="cylinder"></site>
+		</body>
+		<body name="object2" pos="0.025 0.025 0.02">
+			<joint name="object2:joint" type="free" damping="0.01"></joint>
+			<geom size="0.025 0.02" type="cylinder" condim="3" name="object2" material="puck_mat" friction="0.03 0.0025 0.0001" mass="5"></geom>
+			<site name="object2" pos="0 0 0.023" size="0.025 0.003" material="puck_mat3" type="cylinder"></site>
+		</body>
+		<body name="object3" pos="0.025 0.025 0.02">
+			<joint name="object3:joint" type="free" damping="0.01"></joint>
+			<geom size="0.025 0.02" type="cylinder" condim="3" name="object3" material="puck_mat" friction="0.03 0.0025 0.0001" mass="5"></geom>
+			<site name="object3" pos="0 0 0.023" size="0.025 0.003" material="puck_mat4" type="cylinder"></site>
+		</body>
+		<body name="object4" pos="0.025 0.025 0.02">
+			<joint name="object4:joint" type="free" damping="0.01"></joint>
+			<geom size="0.025 0.02" type="cylinder" condim="3" name="object4" material="puck_mat" friction="0.03 0.0025 0.0001" mass="5"></geom>
+			<site name="object4" pos="0 0 0.023" size="0.025 0.003" material="puck_mat5" type="cylinder"></site>
+		</body>
+
+		<light directional="true" ambient="0.2 0.2 0.2" diffuse="0.8 0.8 0.8" specular="0.3 0.3 0.3" castshadow="false" pos="0 0 4" dir="0 0 -1" name="light0"></light>
+	</worldbody>
+	
+	<actuator></actuator>
+</mujoco>

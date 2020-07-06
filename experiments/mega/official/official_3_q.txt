@@ -1,0 +1,4 @@
+python experiments/mega/train_mega.py --env antmaze --tb AM --optimize_every 2 --max_steps 10000000 --seed 444 --first_visit_succ
+python experiments/mega/train_mega.py --env antmaze --tb AM --optimize_every 2 --max_steps 10000000 --seed 555 --first_visit_succ
+python experiments/mega/train_mega.py --env antmaze --tb AM --optimize_every 2 --max_steps 10000000 --seed 444 --first_visit_succ --ag_curiosity minkde
+python experiments/mega/train_mega.py --env antmaze --tb AM --optimize_every 2 --max_steps 10000000 --seed 555 --first_visit_succ --ag_curiosity minkde

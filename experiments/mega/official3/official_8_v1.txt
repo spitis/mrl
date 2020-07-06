@@ -1,0 +1,6 @@
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FUTURE_MINKDE --optimize_every 4 --max_steps 5000000 --seed 111 --ag_curiosity minkde  --replay_size 5000000 --her future_4
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FUTURE_MINKDE --optimize_every 4 --max_steps 5000000 --seed 222 --ag_curiosity minkde  --replay_size 5000000 --her future_4
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FUTURE_MINKDE --optimize_every 4 --max_steps 5000000 --seed 333 --ag_curiosity minkde  --replay_size 5000000 --her future_4
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FUTURE_SKEWFIT --optimize_every 4 --max_steps 5000000 --seed 111 --ag_curiosity randkde  --replay_size 5000000 --her future_4
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FUTURE_SKEWFIT --optimize_every 4 --max_steps 5000000 --seed 222 --ag_curiosity randkde  --replay_size 5000000 --her future_4
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb FUTURE_SKEWFIT --optimize_every 4 --max_steps 5000000 --seed 333 --ag_curiosity randkde  --replay_size 5000000 --her future_4
