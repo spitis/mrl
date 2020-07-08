@@ -12,6 +12,12 @@ Train loop is easily customized, so that you can do, e.g., BatchRL, transfer, or
 
 Environment parallelization is done via VecEnv, and we rely on GPU for optimization parallelization. Future work should consider how they can be done asynchronously; e.g., using [Ray](https://ray.readthedocs.io/en/latest/). 
 
+
+### Performance Benchmarks
+
+mrl provides state of the art implementations of SAC, TD3, and DDPG+HER. See the [Mujoco and Multi-goal benchmarks](https://github.com/spitis/mrl/blob/master/experiments/benchmarks/readme.md). 
+
+
 ## Installation
 
 There is a `requirements.txt` that was works with venv:
