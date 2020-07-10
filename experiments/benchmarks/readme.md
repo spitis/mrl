@@ -12,11 +12,11 @@ Note that while TD3 matches SAC, it tends to be less stable to choice of hyperpa
 
 #### Training Online
 
-<img src="plots/mujoco_halfcheetah.png" alt="halfcheetah" style="width:400px;"/>
-<img src="plots/mujoco_ant.png" alt="ant" style="width:400px;"/>
-<img src="plots/mujoco_hopper.png" alt="hopper" style="width:400px;"/>
-<img src="plots/mujoco_walker.png" alt="walker" style="width:400px;"/>
-<img src="plots/mujoco_humanoid.png" alt="humanoid" style="width:400px;"/>
+<img src="plots/mujoco_halfcheetah.png" alt="halfcheetah" width=400/>
+<img src="plots/mujoco_ant.png" alt="ant" width=400/>
+<img src="plots/mujoco_hopper.png" alt="hopper" width=400/>
+<img src="plots/mujoco_walker.png" alt="walker" width=400/>
+<img src="plots/mujoco_humanoid.png" alt="humanoid" width=400/>
 
 ## Robotics Environments
 
@@ -26,13 +26,13 @@ Note that while the HER implementation supports TD3/SAC, the DDPG appears to do 
 
 #### Fetch
 
-<img src="plots/robotics_fetch_reach.png" alt="reach" style="width:400px;"/>
-<img src="plots/robotics_fetch_push.png" alt="push" style="width:400px;"/>
-<img src="plots/robotics_fetch_pickplace.png" alt="pickplace" style="width:400px;"/>
-<img src="plots/robotics_fetch_slide.png" alt="slide" style="width:400px;"/>
+<img src="plots/robotics_fetch_reach.png" alt="reach" width=400/>
+<img src="plots/robotics_fetch_push.png" alt="push" width=400/>
+<img src="plots/robotics_fetch_pickplace.png" alt="pickplace" width=400/>
+<img src="plots/robotics_fetch_slide.png" alt="slide" width=400/>
 
 #### Hand
 
-<img src="plots/robotics_hand_egg.png" alt="egg" style="width:400px;"/>
-<img src="plots/robotics_hand_block.png" alt="block" style="width:400px;"/>
-<img src="plots/robotics_hand_pen.png" alt="pen" style="width:400px;"/> 
+<img src="plots/robotics_hand_egg.png" alt="egg" width=400/>
+<img src="plots/robotics_hand_block.png" alt="block" width=400/>
+<img src="plots/robotics_hand_pen.png" alt="pen" width=400/> 
