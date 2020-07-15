@@ -10,7 +10,6 @@ import torch.nn as nn
 
 # 2. Get default config and update any defaults (this automatically updates the argparse defaults)
 config = protoge_config()
-# config.batch_size = 2000
 
 # 3. Make changes to the argparse below
 

@@ -1,0 +1,217 @@
+# POINTMAZE
+
+python experiments/mega/train_mega.py --env pointmaze --tb HER --max_steps 2500000 --seed 111 --first_visit_succ --replay_size 2500000 --save_embeddings
+python experiments/mega/train_mega.py --env pointmaze --tb HER --max_steps 2500000 --seed 222 --first_visit_succ --replay_size 2500000 
+python experiments/mega/train_mega.py --env pointmaze --tb HER --max_steps 2500000 --seed 333 --first_visit_succ --replay_size 2500000 
+python experiments/mega/train_mega.py --env pointmaze --tb HER --max_steps 2500000 --seed 444 --first_visit_succ --replay_size 2500000 
+python experiments/mega/train_mega.py --env pointmaze --tb HER --max_steps 2500000 --seed 555 --first_visit_succ --replay_size 2500000 
+python experiments/mega/train_mega.py --env pointmaze --tb MEGA --max_steps 2500000 --seed 111 --first_visit_succ --ag_curiosity minkde --replay_size 2500000 --save_embeddings
+python experiments/mega/train_mega.py --env pointmaze --tb MEGA --max_steps 2500000 --seed 222 --first_visit_succ --ag_curiosity minkde --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb MEGA --max_steps 2500000 --seed 333 --first_visit_succ --ag_curiosity minkde --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb MEGA --max_steps 2500000 --seed 444 --first_visit_succ --ag_curiosity minkde --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb MEGA --max_steps 2500000 --seed 555 --first_visit_succ --ag_curiosity minkde --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb OMEGA --max_steps 2500000 --seed 111 --first_visit_succ --ag_curiosity minkde --replay_size 2500000 --save_embeddings  --transition_to_dg
+python experiments/mega/train_mega.py --env pointmaze --tb OMEGA --max_steps 2500000 --seed 222 --first_visit_succ --ag_curiosity minkde --replay_size 2500000 --transition_to_dg 
+python experiments/mega/train_mega.py --env pointmaze --tb OMEGA --max_steps 2500000 --seed 333 --first_visit_succ --ag_curiosity minkde --replay_size 2500000 --transition_to_dg 
+python experiments/mega/train_mega.py --env pointmaze --tb OMEGA --max_steps 2500000 --seed 444 --first_visit_succ --ag_curiosity minkde --replay_size 2500000 --transition_to_dg 
+python experiments/mega/train_mega.py --env pointmaze --tb OMEGA --max_steps 2500000 --seed 555 --first_visit_succ --ag_curiosity minkde --replay_size 2500000 --transition_to_dg 
+python experiments/mega/train_mega.py --env pointmaze --tb DIVERSE --max_steps 2500000 --seed 111 --first_visit_succ --ag_curiosity randkde --replay_size 2500000 --save_embeddings
+python experiments/mega/train_mega.py --env pointmaze --tb DIVERSE --max_steps 2500000 --seed 222 --first_visit_succ --ag_curiosity randkde --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb DIVERSE --max_steps 2500000 --seed 333 --first_visit_succ --ag_curiosity randkde --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb DIVERSE --max_steps 2500000 --seed 444 --first_visit_succ --ag_curiosity randkde --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb DIVERSE --max_steps 2500000 --seed 555 --first_visit_succ --ag_curiosity randkde --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb ACHIEVED --max_steps 2500000 --seed 111 --first_visit_succ --ag_curiosity randkde --alpha 0. --replay_size 2500000  --save_embeddings
+python experiments/mega/train_mega.py --env pointmaze --tb ACHIEVED --max_steps 2500000 --seed 222 --first_visit_succ --ag_curiosity randkde --alpha 0. --replay_size 2500000 
+python experiments/mega/train_mega.py --env pointmaze --tb ACHIEVED --max_steps 2500000 --seed 333 --first_visit_succ --ag_curiosity randkde --alpha 0. --replay_size 2500000 
+python experiments/mega/train_mega.py --env pointmaze --tb ACHIEVED --max_steps 2500000 --seed 444 --first_visit_succ --ag_curiosity randkde --alpha 0. --replay_size 2500000 
+python experiments/mega/train_mega.py --env pointmaze --tb ACHIEVED --max_steps 2500000 --seed 555 --first_visit_succ --ag_curiosity randkde --alpha 0. --replay_size 2500000 
+python experiments/mega/train_mega.py --env pointmaze --tb GOALGAN --max_steps 2500000 --seed 111 --first_visit_succ --ag_curiosity goaldisc --replay_size 2500000 --save_embeddings
+python experiments/mega/train_mega.py --env pointmaze --tb GOALGAN --max_steps 2500000 --seed 222 --first_visit_succ --ag_curiosity goaldisc --replay_size 2500000 
+python experiments/mega/train_mega.py --env pointmaze --tb GOALGAN --max_steps 2500000 --seed 333 --first_visit_succ --ag_curiosity goaldisc --replay_size 2500000 
+python experiments/mega/train_mega.py --env pointmaze --tb GOALGAN --max_steps 2500000 --seed 444 --first_visit_succ --ag_curiosity goaldisc --replay_size 2500000 
+python experiments/mega/train_mega.py --env pointmaze --tb GOALGAN --max_steps 2500000 --seed 555 --first_visit_succ --ag_curiosity goaldisc --replay_size 2500000 
+python experiments/mega/train_mega.py --env pointmaze --tb MIN_Q --max_steps 2500000 --seed 111 --first_visit_succ --ag_curiosity minq --replay_size 2500000 --save_embeddings
+python experiments/mega/train_mega.py --env pointmaze --tb MIN_Q --max_steps 2500000 --seed 222 --first_visit_succ --ag_curiosity minq --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb MIN_Q --max_steps 2500000 --seed 333 --first_visit_succ --ag_curiosity minq --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb MIN_Q --max_steps 2500000 --seed 444 --first_visit_succ --ag_curiosity minq --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb MIN_Q --max_steps 2500000 --seed 555 --first_visit_succ --ag_curiosity minq --replay_size 2500000
+
+## MEGA w/ RND/FLOW
+
+python experiments/mega/train_mega.py --env pointmaze --tb RND --max_steps 2500000 --seed 111 --first_visit_succ --ag_curiosity minrnd --replay_size 2500000 --save_embeddings
+python experiments/mega/train_mega.py --env pointmaze --tb RND --max_steps 2500000 --seed 222 --first_visit_succ --ag_curiosity minrnd --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb RND --max_steps 2500000 --seed 333 --first_visit_succ --ag_curiosity minrnd --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb FLOW --max_steps 2500000 --seed 111 --first_visit_succ --ag_curiosity minflow --replay_size 2500000 --save_embeddings
+python experiments/mega/train_mega.py --env pointmaze --tb FLOW --max_steps 2500000 --seed 222 --first_visit_succ --ag_curiosity minflow --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb FLOW --max_steps 2500000 --seed 333 --first_visit_succ --ag_curiosity minflow --replay_size 2500000
+
+## MEGA w/ Entropy Gain
+
+python experiments/mega/train_mega.py --env pointmaze --tb EG_CONDKDE2 --max_steps 2500000 --seed 111 --first_visit_succ --ag_curiosity entropygainscore --save_embeddings --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb EG_CONDKDE2 --max_steps 2500000 --seed 222 --first_visit_succ --ag_curiosity entropygainscore --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb EG_CONDKDE2 --max_steps 2500000 --seed 333 --first_visit_succ --ag_curiosity entropygainscore --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb EG_CONDKDE2 --max_steps 2500000 --seed 444 --first_visit_succ --ag_curiosity entropygainscore --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb EG_CONDKDE2 --max_steps 2500000 --seed 555 --first_visit_succ --ag_curiosity entropygainscore --replay_size 2500000
+python experiments/mega/train_mega.py --env pointmaze --tb EG_CONDKDE2_TRANSITION --max_steps 2500000 --seed 111 --first_visit_succ --ag_curiosity entropygainscore --save_embeddings --replay_size 2500000 --transition_to_dg
+python experiments/mega/train_mega.py --env pointmaze --tb EG_CONDKDE2_TRANSITION --max_steps 2500000 --seed 222 --first_visit_succ --ag_curiosity entropygainscore --replay_size 2500000 --transition_to_dg
+python experiments/mega/train_mega.py --env pointmaze --tb EG_CONDKDE2_TRANSITION --max_steps 2500000 --seed 333 --first_visit_succ --ag_curiosity entropygainscore --replay_size 2500000 --transition_to_dg
+python experiments/mega/train_mega.py --env pointmaze --tb EG_CONDKDE2_TRANSITION --max_steps 2500000 --seed 444 --first_visit_succ --ag_curiosity entropygainscore --replay_size 2500000 --transition_to_dg
+python experiments/mega/train_mega.py --env pointmaze --tb EG_CONDKDE2_TRANSITION --max_steps 2500000 --seed 555 --first_visit_succ --ag_curiosity entropygainscore --replay_size 2500000 --transition_to_dg
+
+# ANTMAZE
+
+python experiments/mega/train_mega.py --env antmaze --tb HER --max_steps 10000000 --seed 111 --first_visit_succ --replay_size 10000000 --save_embeddings --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb HER --max_steps 10000000 --seed 222 --first_visit_succ --replay_size 10000000 --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb HER --max_steps 10000000 --seed 333 --first_visit_succ --replay_size 10000000 --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb HER --max_steps 10000000 --seed 444 --first_visit_succ --replay_size 10000000 --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb HER --max_steps 10000000 --seed 555 --first_visit_succ --replay_size 10000000 --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb MEGA --max_steps 10000000 --seed 111 --first_visit_succ --ag_curiosity minkde --replay_size 10000000 --save_embeddings --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb MEGA --max_steps 10000000 --seed 222 --first_visit_succ --ag_curiosity minkde --replay_size 10000000 --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb MEGA --max_steps 10000000 --seed 333 --first_visit_succ --ag_curiosity minkde --replay_size 10000000 --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb MEGA --max_steps 10000000 --seed 444 --first_visit_succ --ag_curiosity minkde --replay_size 10000000 --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb MEGA --max_steps 10000000 --seed 555 --first_visit_succ --ag_curiosity minkde --replay_size 10000000 --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb OMEGA --max_steps 10000000 --seed 111 --first_visit_succ --ag_curiosity minkde --replay_size 10000000 --save_embeddings  --transition_to_dg --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb OMEGA --max_steps 10000000 --seed 222 --first_visit_succ --ag_curiosity minkde --replay_size 10000000 --transition_to_dg --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb OMEGA --max_steps 10000000 --seed 333 --first_visit_succ --ag_curiosity minkde --replay_size 10000000 --transition_to_dg --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb OMEGA --max_steps 10000000 --seed 444 --first_visit_succ --ag_curiosity minkde --replay_size 10000000 --transition_to_dg --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb OMEGA --max_steps 10000000 --seed 555 --first_visit_succ --ag_curiosity minkde --replay_size 10000000 --transition_to_dg --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb DIVERSE --max_steps 10000000 --seed 111 --first_visit_succ --ag_curiosity randkde --replay_size 10000000 --save_embeddings --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb DIVERSE --max_steps 10000000 --seed 222 --first_visit_succ --ag_curiosity randkde --replay_size 10000000 --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb DIVERSE --max_steps 10000000 --seed 333 --first_visit_succ --ag_curiosity randkde --replay_size 10000000 --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb DIVERSE --max_steps 10000000 --seed 444 --first_visit_succ --ag_curiosity randkde --replay_size 10000000 --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb DIVERSE --max_steps 10000000 --seed 555 --first_visit_succ --ag_curiosity randkde --replay_size 10000000 --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb ACHIEVED --max_steps 10000000 --seed 111 --first_visit_succ --ag_curiosity randkde --alpha 0. --replay_size 10000000  --save_embeddings --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb ACHIEVED --max_steps 10000000 --seed 222 --first_visit_succ --ag_curiosity randkde --alpha 0. --replay_size 10000000 --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb ACHIEVED --max_steps 10000000 --seed 333 --first_visit_succ --ag_curiosity randkde --alpha 0. --replay_size 10000000 --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb ACHIEVED --max_steps 10000000 --seed 444 --first_visit_succ --ag_curiosity randkde --alpha 0. --replay_size 10000000 --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb ACHIEVED --max_steps 10000000 --seed 555 --first_visit_succ --ag_curiosity randkde --alpha 0. --replay_size 10000000 --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb GOALGAN --max_steps 10000000 --seed 111 --first_visit_succ --ag_curiosity goaldisc --replay_size 10000000 --save_embeddings --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb GOALGAN --max_steps 10000000 --seed 222 --first_visit_succ --ag_curiosity goaldisc --replay_size 10000000 --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb GOALGAN --max_steps 10000000 --seed 333 --first_visit_succ --ag_curiosity goaldisc --replay_size 10000000 --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb GOALGAN --max_steps 10000000 --seed 444 --first_visit_succ --ag_curiosity goaldisc --replay_size 10000000 --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb GOALGAN --max_steps 10000000 --seed 555 --first_visit_succ --ag_curiosity goaldisc --replay_size 10000000 --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb MIN_Q --max_steps 10000000 --seed 111 --first_visit_succ --ag_curiosity minq --replay_size 10000000 --save_embeddings --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb MIN_Q --max_steps 10000000 --seed 222 --first_visit_succ --ag_curiosity minq --replay_size 10000000 --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb MIN_Q --max_steps 10000000 --seed 333 --first_visit_succ --ag_curiosity minq --replay_size 10000000 --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb MIN_Q --max_steps 10000000 --seed 444 --first_visit_succ --ag_curiosity minq --replay_size 10000000 --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+python experiments/mega/train_mega.py --env antmaze --tb MIN_Q --max_steps 10000000 --seed 555 --first_visit_succ --ag_curiosity minq --replay_size 10000000 --optimize_every 2 --gamma 0.99 --go_eexplore 0.01 --env_max_step 500
+
+
+# FPP HARD
+
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb HER --max_steps 5000000 --seed 111 --replay_size 5000000 --save_embeddings --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb HER --max_steps 5000000 --seed 222 --replay_size 5000000 --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb HER --max_steps 5000000 --seed 333 --replay_size 5000000 --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb HER --max_steps 5000000 --seed 444 --replay_size 5000000 --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb HER --max_steps 5000000 --seed 555 --replay_size 5000000 --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb MEGA --max_steps 5000000 --seed 111 --ag_curiosity minkde --replay_size 5000000 --save_embeddings --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb MEGA --max_steps 5000000 --seed 222 --ag_curiosity minkde --replay_size 5000000 --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb MEGA --max_steps 5000000 --seed 333 --ag_curiosity minkde --replay_size 5000000 --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb MEGA --max_steps 5000000 --seed 444 --ag_curiosity minkde --replay_size 5000000 --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb MEGA --max_steps 5000000 --seed 555 --ag_curiosity minkde --replay_size 5000000 --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb OMEGA --max_steps 5000000 --seed 111 --ag_curiosity minkde --replay_size 5000000 --save_embeddings  --transition_to_dg --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb OMEGA --max_steps 5000000 --seed 222 --ag_curiosity minkde --replay_size 5000000 --transition_to_dg --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb OMEGA --max_steps 5000000 --seed 333 --ag_curiosity minkde --replay_size 5000000 --transition_to_dg --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb OMEGA --max_steps 5000000 --seed 444 --ag_curiosity minkde --replay_size 5000000 --transition_to_dg --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb OMEGA --max_steps 5000000 --seed 555 --ag_curiosity minkde --replay_size 5000000 --transition_to_dg --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb DIVERSE --max_steps 5000000 --seed 111 --ag_curiosity randkde --replay_size 5000000 --save_embeddings --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb DIVERSE --max_steps 5000000 --seed 222 --ag_curiosity randkde --replay_size 5000000 --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb DIVERSE --max_steps 5000000 --seed 333 --ag_curiosity randkde --replay_size 5000000 --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb DIVERSE --max_steps 5000000 --seed 444 --ag_curiosity randkde --replay_size 5000000 --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb DIVERSE --max_steps 5000000 --seed 555 --ag_curiosity randkde --replay_size 5000000 --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb ACHIEVED --max_steps 5000000 --seed 111 --ag_curiosity randkde --alpha 0. --replay_size 5000000  --save_embeddings --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb ACHIEVED --max_steps 5000000 --seed 222 --ag_curiosity randkde --alpha 0. --replay_size 5000000 --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb ACHIEVED --max_steps 5000000 --seed 333 --ag_curiosity randkde --alpha 0. --replay_size 5000000 --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb ACHIEVED --max_steps 5000000 --seed 444 --ag_curiosity randkde --alpha 0. --replay_size 5000000 --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb ACHIEVED --max_steps 5000000 --seed 555 --ag_curiosity randkde --alpha 0. --replay_size 5000000 --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb GOALGAN --max_steps 5000000 --seed 111 --ag_curiosity goaldisc --replay_size 5000000 --save_embeddings --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb GOALGAN --max_steps 5000000 --seed 222 --ag_curiosity goaldisc --replay_size 5000000 --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb GOALGAN --max_steps 5000000 --seed 333 --ag_curiosity goaldisc --replay_size 5000000 --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb GOALGAN --max_steps 5000000 --seed 444 --ag_curiosity goaldisc --replay_size 5000000 --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb GOALGAN --max_steps 5000000 --seed 555 --ag_curiosity goaldisc --replay_size 5000000 --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb MIN_Q --max_steps 5000000 --seed 111 --ag_curiosity minq --replay_size 5000000 --save_embeddings --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb MIN_Q --max_steps 5000000 --seed 222 --ag_curiosity minq --replay_size 5000000 --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb MIN_Q --max_steps 5000000 --seed 333 --ag_curiosity minq --replay_size 5000000 --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb MIN_Q --max_steps 5000000 --seed 444 --ag_curiosity minq --replay_size 5000000 --optimize_every 4 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb MIN_Q --max_steps 5000000 --seed 555 --ag_curiosity minq --replay_size 5000000 --optimize_every 4 --her rfaab_1_5_2_1_1
+
+
+## FPP HARD - HER VS LONGNESS of HORIZON
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0. --pp_max_air 0.1 --tb SUCCLONGHOR0_HER --optimize_every 2 --max_steps 5000000 --seed 111 --save_embeddings  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0. --pp_max_air 0.1 --tb SUCCLONGHOR0_HER --optimize_every 2 --max_steps 5000000 --seed 222  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0. --pp_max_air 0.1 --tb SUCCLONGHOR0_HER --optimize_every 2 --max_steps 5000000 --seed 333  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.1 --pp_max_air 0.2 --tb SUCCLONGHOR1_HER --optimize_every 2 --max_steps 5000000 --seed 111 --save_embeddings  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.1 --pp_max_air 0.2 --tb SUCCLONGHOR1_HER --optimize_every 2 --max_steps 5000000 --seed 222  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.1 --pp_max_air 0.2 --tb SUCCLONGHOR1_HER --optimize_every 2 --max_steps 5000000 --seed 333  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.2 --pp_max_air 0.3 --tb SUCCLONGHOR2_HER --optimize_every 2 --max_steps 5000000 --seed 111 --save_embeddings  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.2 --pp_max_air 0.3 --tb SUCCLONGHOR2_HER --optimize_every 2 --max_steps 5000000 --seed 222  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.2 --pp_max_air 0.3 --tb SUCCLONGHOR2_HER --optimize_every 2 --max_steps 5000000 --seed 333  --replay_size 5000000
+
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0. --pp_max_air 0.1 --tb SUCCLONGHOR0_OMEGA --ag_curiosity minkde --transition_to_dg --optimize_every 2 --max_steps 5000000 --seed 111 --save_embeddings  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0. --pp_max_air 0.1 --tb SUCCLONGHOR0_OMEGA --ag_curiosity minkde --transition_to_dg --optimize_every 2 --max_steps 5000000 --seed 222  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0. --pp_max_air 0.1 --tb SUCCLONGHOR0_OMEGA --ag_curiosity minkde --transition_to_dg --optimize_every 2 --max_steps 5000000 --seed 333  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.1 --pp_max_air 0.2 --tb SUCCLONGHOR1_OMEGA --ag_curiosity minkde --transition_to_dg --optimize_every 2 --max_steps 5000000 --seed 111 --save_embeddings  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.1 --pp_max_air 0.2 --tb SUCCLONGHOR1_OMEGA --ag_curiosity minkde --transition_to_dg --optimize_every 2 --max_steps 5000000 --seed 222  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.1 --pp_max_air 0.2 --tb SUCCLONGHOR1_OMEGA --ag_curiosity minkde --transition_to_dg --optimize_every 2 --max_steps 5000000 --seed 333  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.2 --pp_max_air 0.3 --tb SUCCLONGHOR2_OMEGA --ag_curiosity minkde --transition_to_dg --optimize_every 2 --max_steps 5000000 --seed 111 --save_embeddings  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.2 --pp_max_air 0.3 --tb SUCCLONGHOR2_OMEGA --ag_curiosity minkde --transition_to_dg --optimize_every 2 --max_steps 5000000 --seed 222  --replay_size 5000000
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --pp_min_air 0.2 --pp_max_air 0.3 --tb SUCCLONGHOR2_OMEGA --ag_curiosity minkde --transition_to_dg --optimize_every 2 --max_steps 5000000 --seed 333  --replay_size 5000000
+
+# STACK2
+
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb HER --max_steps 10000000 --seed 111 --replay_size 10000000 --save_embeddings --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb HER --max_steps 10000000 --seed 222 --replay_size 10000000 --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb HER --max_steps 10000000 --seed 333 --replay_size 10000000 --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb HER --max_steps 10000000 --seed 444 --replay_size 10000000 --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb HER --max_steps 10000000 --seed 555 --replay_size 10000000 --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb MEGA --max_steps 10000000 --seed 111 --ag_curiosity minkde --replay_size 10000000 --save_embeddings --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb MEGA --max_steps 10000000 --seed 222 --ag_curiosity minkde --replay_size 10000000 --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb MEGA --max_steps 10000000 --seed 333 --ag_curiosity minkde --replay_size 10000000 --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb MEGA --max_steps 10000000 --seed 444 --ag_curiosity minkde --replay_size 10000000 --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb MEGA --max_steps 10000000 --seed 555 --ag_curiosity minkde --replay_size 10000000 --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb OMEGA --max_steps 10000000 --seed 111 --ag_curiosity minkde --replay_size 10000000 --save_embeddings  --transition_to_dg --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb OMEGA --max_steps 10000000 --seed 222 --ag_curiosity minkde --replay_size 10000000 --transition_to_dg --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb OMEGA --max_steps 10000000 --seed 333 --ag_curiosity minkde --replay_size 10000000 --transition_to_dg --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb OMEGA --max_steps 10000000 --seed 444 --ag_curiosity minkde --replay_size 10000000 --transition_to_dg --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb OMEGA --max_steps 10000000 --seed 555 --ag_curiosity minkde --replay_size 10000000 --transition_to_dg --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb DIVERSE --max_steps 10000000 --seed 111 --ag_curiosity randkde --replay_size 10000000 --save_embeddings --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb DIVERSE --max_steps 10000000 --seed 222 --ag_curiosity randkde --replay_size 10000000 --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb DIVERSE --max_steps 10000000 --seed 333 --ag_curiosity randkde --replay_size 10000000 --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb DIVERSE --max_steps 10000000 --seed 444 --ag_curiosity randkde --replay_size 10000000 --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb DIVERSE --max_steps 10000000 --seed 555 --ag_curiosity randkde --replay_size 10000000 --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb ACHIEVED --max_steps 10000000 --seed 111 --ag_curiosity randkde --alpha 0. --replay_size 10000000  --save_embeddings --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb ACHIEVED --max_steps 10000000 --seed 222 --ag_curiosity randkde --alpha 0. --replay_size 10000000 --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb ACHIEVED --max_steps 10000000 --seed 333 --ag_curiosity randkde --alpha 0. --replay_size 10000000 --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb ACHIEVED --max_steps 10000000 --seed 444 --ag_curiosity randkde --alpha 0. --replay_size 10000000 --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb ACHIEVED --max_steps 10000000 --seed 555 --ag_curiosity randkde --alpha 0. --replay_size 10000000 --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb GOALGAN --max_steps 10000000 --seed 111 --ag_curiosity goaldisc --replay_size 10000000 --save_embeddings --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb GOALGAN --max_steps 10000000 --seed 222 --ag_curiosity goaldisc --replay_size 10000000 --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb GOALGAN --max_steps 10000000 --seed 333 --ag_curiosity goaldisc --replay_size 10000000 --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb GOALGAN --max_steps 10000000 --seed 444 --ag_curiosity goaldisc --replay_size 10000000 --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb GOALGAN --max_steps 10000000 --seed 555 --ag_curiosity goaldisc --replay_size 10000000 --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb MIN_Q --max_steps 10000000 --seed 111 --ag_curiosity minq --replay_size 10000000 --save_embeddings --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb MIN_Q --max_steps 10000000 --seed 222 --ag_curiosity minq --replay_size 10000000 --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb MIN_Q --max_steps 10000000 --seed 333 --ag_curiosity minq --replay_size 10000000 --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb MIN_Q --max_steps 10000000 --seed 444 --ag_curiosity minq --replay_size 10000000 --optimize_every 10 --her rfaab_1_5_2_1_1
+python experiments/mega/train_mega.py --env stack2_obj_obj --tb MIN_Q --max_steps 10000000 --seed 555 --ag_curiosity minq --replay_size 10000000 --optimize_every 10 --her rfaab_1_5_2_1_1
+
+# MEP
+
+python experiments/mega/train_mega.py --env pointmaze --tb HER_MEP--max_steps 1000000 --seed 111 --first_visit_succ --replay_size 1000000 --prioritized_mode mep
+python experiments/mega/train_mega.py --env pointmaze --tb HER_MEP --max_steps 1000000 --seed 222 --first_visit_succ --replay_size 1000000 --prioritized_mode mep
+python experiments/mega/train_mega.py --env pointmaze --tb HER_MEP --max_steps 1000000 --seed 333 --first_visit_succ --replay_size 1000000 --prioritized_mode mep
+python experiments/mega/train_mega.py --env pointmaze --tb MEGA_MEP --max_steps 1000000 --seed 111 --first_visit_succ --ag_curiosity minkde  --replay_size 1000000--prioritized_mode mep
+python experiments/mega/train_mega.py --env pointmaze --tb MEGA_MEP --max_steps 1000000 --seed 222 --first_visit_succ --ag_curiosity minkde  --replay_size 1000000--prioritized_mode mep
+python experiments/mega/train_mega.py --env pointmaze --tb MEGA_MEP --max_steps 1000000 --seed 333 --first_visit_succ --ag_curiosity minkde  --replay_size 1000000--prioritized_mode mep
+python experiments/mega/train_mega.py --env pointmaze --tb OMEGA_MEP --max_steps 1000000 --seed 111 --first_visit_succ --ag_curiosity minkde  --replay_size 1000000 --transition_to_dg --prioritized_mode mep
+python experiments/mega/train_mega.py --env pointmaze --tb OMEGA_MEP --max_steps 1000000 --seed 222 --first_visit_succ --ag_curiosity minkde  --replay_size 1000000 --transition_to_dg --prioritized_mode mep
+python experiments/mega/train_mega.py --env pointmaze --tb OMEGA_MEP --max_steps 1000000 --seed 333 --first_visit_succ --ag_curiosity minkde  --replay_size 1000000 --transition_to_dg --prioritized_mode mep
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb HER_MEP --optimize_every 4 --max_steps 1000000 --seed 111 --replay_size 1000000 --her rfaab_1_5_2_1_1 --prioritized_mode mep
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb HER_MEP --optimize_every 4 --max_steps 1000000 --seed 222 --replay_size 1000000 --her rfaab_1_5_2_1_1 --prioritized_mode mep
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb HER_MEP --optimize_every 4 --max_steps 1000000 --seed 333 --replay_size 1000000 --her rfaab_1_5_2_1_1 --prioritized_mode mep
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb MEGA_MEP --optimize_every 4 --max_steps 1000000 --seed 111 --ag_curiosity minkde  --replay_size 1000000 --her rfaab_1_5_2_1_1 --prioritized_mode mep
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb MEGA_MEP --optimize_every 4 --max_steps 1000000 --seed 222 --ag_curiosity minkde  --replay_size 1000000 --her rfaab_1_5_2_1_1 --prioritized_mode mep
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb MEGA_MEP --optimize_every 4 --max_steps 1000000 --seed 333 --ag_curiosity minkde  --replay_size 1000000 --her rfaab_1_5_2_1_1 --prioritized_mode mep
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb OMEGA_MEP --optimize_every 4 --max_steps 1000000 --seed 111 --ag_curiosity minkde  --replay_size 1000000  --her rfaab_1_5_2_1_1 --transition_to_dg --prioritized_mode mep
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb OMEGA_MEP --optimize_every 4 --max_steps 1000000 --seed 222 --ag_curiosity minkde  --replay_size 1000000  --her rfaab_1_5_2_1_1 --transition_to_dg --prioritized_mode mep
+python experiments/mega/train_mega.py --env pickplace_obj_obj --pp_in_air_percentage 1. --hard --tb OMEGA_MEP --optimize_every 4 --max_steps 1000000 --seed 333 --ag_curiosity minkde  --replay_size 1000000  --her rfaab_1_5_2_1_1 --transition_to_dg --prioritized_mode mep
