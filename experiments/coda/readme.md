@@ -1,6 +1,6 @@
 # CoDA CoDE Supplement
 
-This contains an implementation of CoDA and the Batch RL / Multi-goal experiments used in our paper. 
+This contains an implementation of CoDA and the Batch RL / Multi-goal experiments used in our NeurIPS 2020 paper *Counterfactual Data Augmentation using Locally Factored Dynamics*. [Arxiv link](https://arxiv.org/abs/2007.02863). 
 
 
 ## Installation
