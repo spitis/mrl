@@ -46,5 +46,5 @@ tabulate==0.8.7
 tensorboard==2.2.1
 tensorboard-plugin-wit==1.6.0.post3
 tornado==6.0.4
-urllib3==1.25.9
+urllib3==1.26.5
 Werkzeug==1.0.1
