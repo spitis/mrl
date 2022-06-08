@@ -117,7 +117,7 @@ class Actor(nn.Module):
   def __init__(self, body : nn.Module, action_dim : int, max_action: float):
     super().__init__()
     self.body = body
-    self.fc = layer_init(nn.Linear(self.body.feature_dim, action_dim))
+    self.fc = layer_init(nn.Linear(self.body.feature_dim, action_dim), w_scale=0.1)
     self.max_action = max_action
 
   def forward(self, x):
@@ -128,7 +128,7 @@ class StochasticActor(nn.Module):
   def __init__(self, body : nn.Module, action_dim : int, max_action: float, log_std_bounds = (-20, 2)):
     super().__init__()
     self.body = body
-    self.fc = layer_init(nn.Linear(self.body.feature_dim, action_dim*2))
+    self.fc = layer_init(nn.Linear(self.body.feature_dim, action_dim*2), w_scale=0.1)
     self.max_action = max_action
     self.min_log_std, self.max_log_std = log_std_bounds
     self.log2 = np.log(2)
@@ -159,7 +159,7 @@ class Critic(nn.Module):
     super().__init__()
     self.body = body
     if use_layer_init:
-      self.fc = layer_init(nn.Linear(self.body.feature_dim, output_dim))
+      self.fc = layer_init(nn.Linear(self.body.feature_dim, output_dim), w_scale=0.1)
     else:
       self.fc = nn.Linear(self.body.feature_dim, output_dim)
 

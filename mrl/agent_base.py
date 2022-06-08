@@ -89,6 +89,7 @@ class Agent():
     """Calls the _process_experience function of each relevant module
     (typically, these will include a replay buffer and one or more logging modules)"""
     self.config.env_steps += self.env.num_envs if hasattr(self, 'env') else 1
+
     for module in self._process_experience_registry:
       module._process_experience(experience)
 
@@ -263,9 +264,14 @@ class Agent():
         shutil.copy(file_or_folder, self.agent_folder)
 
 
-  def torch(self, x):
+  def torch(self, x, type=torch.float):
     if isinstance(x, torch.Tensor): return x
-    return torch.FloatTensor(x).to(self.config.device)
+    elif type == torch.float:
+      return torch.FloatTensor(x).to(self.config.device)
+    elif type == torch.long:
+      return torch.LongTensor(x).to(self.config.device)
+    elif type == torch.bool:
+      return torch.BoolTensor(x).to(self.config.device)
 
   def numpy(self, x):
     return x.cpu().detach().numpy()

@@ -16,3 +16,5 @@ These are some files for plotting tensorboard results.
             -- seed2.csv
 ```
 3. If you have some updated tensorboard event files and need to reexport, you can run #1 step above again. But instead of manually copying over, just run `gather_sources.py /path/to/exported` in order to update the newly exported CSV file into the folder hierarchy above.  
+4. Plot the curves with `python plot_bulk.py`.
+   1. This will look for `confs/` folder and output the plots to `plots/` folder (relative to where `plot_bulk.py` is)

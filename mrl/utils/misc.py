@@ -4,6 +4,7 @@ import gym
 import torch
 from types import LambdaType
 from scipy.linalg import block_diag
+import argparse
 try:
   import tensorflow as tf
 except:
@@ -84,11 +85,10 @@ def short_timestamp():
   return '{:%m%d%H%M%S}'.format(datetime.datetime.now())
 
 
-def flatten_state(state):
+def flatten_state(state, modalities=['observation', 'desired_goal']):
+  #TODO: handle image modalities
   if isinstance(state, dict):
-    obs = state['observation']
-    goal = state['desired_goal']
-    return np.concatenate((obs, goal), -1)
+    return np.concatenate([state[m] for m in modalities], -1)
   return state
 
 
@@ -153,7 +153,7 @@ def shorten_attr(attr, set, proposed_len=5):
   return short
 
 
-def softmax(X, theta=1.0, axis=None):
+def softmax(X, theta=1.0, axis=-1):
   """
     Compute the softmax of each element along an axis of X.
 

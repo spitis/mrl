@@ -6,7 +6,7 @@ class EpisodicEval(mrl.Module):
   def __init__(self):
     super().__init__('eval', required_agent_modules = ['eval_env', 'policy'], locals=locals())
   
-  def __call__(self, num_episodes : int, *unused_args):
+  def __call__(self, num_episodes : int, *unused_args, any_success=False):
     """
     Runs num_steps steps in the environment and returns results.
     Results tracking is done here instead of in process_experience, since 
@@ -40,9 +40,9 @@ class EpisodicEval(mrl.Module):
           steps[i] += 1
           if done:
             dones[i] = 1. 
-            if 'is_success' in info:
-              record_success = True
-              is_success[i] = info['is_success']
+          if 'is_success' in info:
+            record_success = True
+            is_success[i] = max(info['is_success'], is_success[i]) if any_success else info['is_success'] 
 
       for ep_reward, step, is_succ in zip(ep_rewards, steps, is_success):
         if record_success:

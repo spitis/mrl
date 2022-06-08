@@ -4,6 +4,7 @@ from gym.envs.robotics.fetch.push import FetchPushEnv
 from gym.envs.robotics.fetch.slide import FetchSlideEnv
 from gym.envs.robotics.fetch.pick_and_place import FetchPickAndPlaceEnv
 from gym.envs.robotics import fetch_env
+from gym import spaces
 import os
 from gym.utils import EzPickle
 from enum import Enum
@@ -1073,6 +1074,109 @@ class DisentangledFetchPushEnv(FetchPushEnv):
     }
 
 
+class DictPush(FetchPushEnv):
+  def __init__(self):
+    super().__init__()
+    obs = self._get_obs()
+    self.observation_space = spaces.Dict(dict(
+      observation=spaces.Box(-np.inf, np.inf, shape=(), dtype='float32'),
+      desired_goal=spaces.Box(-np.inf, np.inf, shape=obs['achieved_goal'].shape, dtype='float32'),
+      achieved_goal=spaces.Box(-np.inf, np.inf, shape=obs['achieved_goal'].shape, dtype='float32'),
+      gripper=spaces.Box(-np.inf, np.inf, shape=obs['gripper'].shape, dtype='float32'),
+      object=spaces.Box(-np.inf, np.inf, shape=obs['object'].shape, dtype='float32'),
+      relative=spaces.Box(-np.inf, np.inf, shape=obs['relative'].shape, dtype='float32'),
+    ))
+
+  def _get_obs(self):
+    dt = self.sim.nsubsteps * self.sim.model.opt.timestep
+
+    # gripper state
+    grip_pos = self.sim.data.get_site_xpos('robot0:grip')
+    grip_velp = self.sim.data.get_site_xvelp('robot0:grip') * dt
+    robot_qpos, robot_qvel = utils.robot_get_obs(self.sim)
+    gripper_state = robot_qpos[-2:]
+    gripper_vel = robot_qvel[-2:] * dt  # change to a scalar if the gripper is made symmetric
+
+    # object state
+    object_pos = self.sim.data.get_site_xpos('object0')
+    # rotations
+    object_rot = rotations.mat2euler(self.sim.data.get_site_xmat('object0'))
+    # velocities
+    object_velp = self.sim.data.get_site_xvelp('object0') * dt
+    object_velr = self.sim.data.get_site_xvelr('object0') * dt
+    # relative states
+    object_rel_pos = object_pos - grip_pos
+    object_rel_vel = object_velp - grip_velp
+
+    achieved_goal = np.squeeze(object_pos)
+
+    return {
+      'observation': np.zeros(0), # hack to get around gym's GoalEnv checks
+      'gripper': np.concatenate([grip_pos, gripper_state, grip_velp, gripper_vel]),
+      'object': np.concatenate([object_pos, object_rot, object_velp, object_velr]),
+      'relative': np.concatenate([object_rel_pos, object_rel_vel]),
+      'achieved_goal': achieved_goal,
+      'desired_goal': self.goal.copy(),
+    }
+
+  def achieved_goal(self, observation):
+    obj = observation['object']
+    if len(obj.shape) == 1:
+      return obj[:3]
+    return obj[:, :3]
+
+class DictPushAndReach(FetchPushEnv):
+  def __init__(self):
+    super().__init__()
+    obs = self._get_obs()
+    self.observation_space = spaces.Dict(dict(
+      observation=spaces.Box(-np.inf, np.inf, shape=(), dtype='float32'),
+      desired_goal=spaces.Box(-np.inf, np.inf, shape=obs['achieved_goal'].shape, dtype='float32'),
+      achieved_goal=spaces.Box(-np.inf, np.inf, shape=obs['achieved_goal'].shape, dtype='float32'),
+      gripper=spaces.Box(-np.inf, np.inf, shape=obs['gripper'].shape, dtype='float32'),
+      object=spaces.Box(-np.inf, np.inf, shape=obs['object'].shape, dtype='float32'),
+      relative=spaces.Box(-np.inf, np.inf, shape=obs['relative'].shape, dtype='float32'),
+      gripper_goal=spaces.Box(-np.inf, np.inf, shape=(3,), dtype='float32'),
+      object_goal=spaces.Box(-np.inf, np.inf, shape=(3,), dtype='float32')
+    ))
+
+  def _get_obs(self):
+    dt = self.sim.nsubsteps * self.sim.model.opt.timestep
+
+    # gripper state
+    grip_pos = self.sim.data.get_site_xpos('robot0:grip')
+    grip_velp = self.sim.data.get_site_xvelp('robot0:grip') * dt
+    robot_qpos, robot_qvel = utils.robot_get_obs(self.sim)
+    gripper_state = robot_qpos[-2:]
+    gripper_vel = robot_qvel[-2:] * dt  # change to a scalar if the gripper is made symmetric
+
+    # object state
+    object_pos = self.sim.data.get_site_xpos('object0')
+    # rotations
+    object_rot = rotations.mat2euler(self.sim.data.get_site_xmat('object0'))
+    # velocities
+    object_velp = self.sim.data.get_site_xvelp('object0') * dt
+    object_velr = self.sim.data.get_site_xvelr('object0') * dt
+    # relative states
+    object_rel_pos = object_pos - grip_pos
+    object_rel_vel = object_velp - grip_velp
+
+    achieved_goal = np.squeeze(object_pos)
+
+    return {
+      'observation': np.zeros(0), # hack to get around gym's GoalEnv checks
+      'gripper': np.concatenate([grip_pos, gripper_state, grip_velp, gripper_vel]),
+      'object': np.concatenate([object_pos, object_rot, object_velp, object_velr]),
+      'relative': np.concatenate([object_rel_pos, object_rel_vel]),
+      'achieved_goal': achieved_goal,
+      'desired_goal': self.goal.copy(),
+    }
+
+  def achieved_goal(self, observation):
+    obj = observation['object']
+    if len(obj.shape) == 1:
+      return obj[:3]
+    return obj[:, :3]
 
 
 class DisentangledFetchSlideEnv(fetch_env.FetchEnv, EzPickle):
@@ -1588,3 +1692,283 @@ class PushNEnv(fetch_env.FetchEnv, EzPickle):
         'achieved_goal': achieved_goal,
         'desired_goal': self.goal.copy(),
     }
+
+
+
+
+class FetchHookSweepAllEnv(fetch_env.FetchEnv):
+  """
+    Mujoco env for robotics sweeping and pushing with a hook object.
+    Configurable for multible variants of difficulty.
+
+    raw_state overrides smaller state with native mjsim representation
+    """
+  def __init__(self, xml_file=None, place_two=False, place_random=False, goal_in_air=False, smaller_state=False, raw_state=False):
+    initial_qpos = {
+        'robot0:slide0': 0.405,
+        'robot0:slide1': 0.48,
+        'robot0:slide2': 0.0,
+        'object0:joint': [1.85, 0.75, 0.4, 1., 0., 0., 0.],
+        'object1:joint': [1.85, 0.75, 0.4, 1., 0., 0., 0.],
+    }
+
+    self.max_step = 75
+    self.num_step = 0
+
+    if xml_file is None:
+      #Go 3 folders up to base of rl_with_teachers dir
+      package_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+      xml_file = os.path.join(dir_path, 'xmls', 'sweep_all.xml')
+
+    self.JOINTS = ('robot0:slide0', 'robot0:slide1', 'robot0:slide2', 'robot0:torso_lift_joint', 
+          'robot0:head_pan_joint', 'robot0:head_tilt_joint', 'robot0:shoulder_pan_joint', 
+          'robot0:shoulder_lift_joint', 'robot0:upperarm_roll_joint', 'robot0:elbow_flex_joint', 
+          'robot0:forearm_roll_joint', 'robot0:wrist_flex_joint', 'robot0:wrist_roll_joint', 
+          'object0:joint', 'object1:joint')
+
+    self.place_two = place_two
+    self.place_random = place_random
+    self.goal_in_air = goal_in_air
+    self.smaller_state = smaller_state
+    self.raw_state = raw_state
+
+    # base goal position, from which all other are derived
+    self._base_goal_pos = np.array([1.85, 0.7, 0.42, 1.85, 0.8, 0.42])
+    if self.goal_in_air:
+      self._base_goal_pos = np.array([1.85, 0.7, 0.6, 1.85, 0.8, 0.42])
+    self._goal_pos = self._base_goal_pos
+
+    fetch_env.FetchEnv.__init__(self,
+                                xml_file,
+                                has_object=True,
+                                block_gripper=False,
+                                n_substeps=20,
+                                gripper_extra_height=0.2,
+                                target_in_the_air=True,
+                                target_offset=0.0,
+                                obj_range=None,
+                                target_range=None,
+                                distance_threshold=0.14,
+                                initial_qpos=initial_qpos,
+                                reward_type='sparse')
+
+    self._goal_pos = self._sample_goal()
+    obs = self._get_obs()
+    self.observation_space = spaces.Dict(
+        dict(observation=spaces.Box(-np.inf, np.inf, shape=obs['observation'].shape, dtype='float32'),
+             achieved_goal=spaces.Box(-np.inf, np.inf, shape=obs['desired_goal'].shape, dtype='float32'),
+             desired_goal=spaces.Box(-np.inf, np.inf, shape=obs['desired_goal'].shape, dtype='float32')))
+
+  def _viewer_setup(self):
+    body_id = self.sim.model.body_name2id('robot0:gripper_link')
+    lookat = self.sim.data.body_xpos[body_id]
+    for idx, value in enumerate(lookat):
+      self.viewer.cam.lookat[idx] = value
+    self.viewer.cam.distance = 2.5
+    self.viewer.cam.azimuth = 180.
+    self.viewer.cam.elevation = -24.
+    
+  def render(self, mode="human", *args, **kwargs):
+    # See https://github.com/openai/gym/issues/1081
+    self._render_callback()
+    if mode == 'rgb_array':
+      self._get_viewer(mode='human').render()
+      width, height = 3350, 1800
+      data = self._get_viewer(mode='human').read_pixels(width, height, depth=False)
+      # original image is upside-down, so flip it
+      return data[::-1, :, :]
+    elif mode == 'human':
+      self._get_viewer(mode='human').render()
+
+    return super().render(*args, **kwargs)
+
+
+  def _render_callback(self):
+    # Visualize target.
+    sites_offset = (self.sim.data.site_xpos - self.sim.model.site_pos)
+    goals = np.split(self.goal, 2)
+
+    for i in range(2):
+      site_id = self.sim.model.site_name2id('target{}'.format(i))
+      self.sim.model.site_pos[site_id] = goals[i] - sites_offset[i]
+    self.sim.forward()
+
+  def _sample_goal(self):
+    goal_pos = self._base_goal_pos.copy()
+
+    adj = self.np_random.random(size=(3, )) * np.array([0.2, 0.2, 0.]) - np.array([0.1, 0.1, 0])
+    if self.np_random.random() < 0.5:
+      adj[0] += 0.31
+    else:
+      adj[0] -= 0.31
+
+    if self.place_two:
+      goal_pos[:3] += adj
+      goal_pos[3:] += adj
+    elif self.place_random:
+      goal_pos[:3] += self.np_random.random(size=(3, )) * np.array([0.8, 0.8, 0.]) - np.array([0.4, 0.4, 0])
+      goal_pos[3:] += self.np_random.random(size=(3, )) * np.array([0.8, 0.8, 0.]) - np.array([0.4, 0.4, 0])
+    else:
+      if self.np_random.random() < 0.5:
+        goal_pos[:3] += adj
+      else:
+        goal_pos[3:] += adj
+
+    return goal_pos
+
+  def _reset_sim(self):
+    self.sim.set_state(self.initial_state)
+
+    while True:
+      deltas = []
+      for o in range(2):
+        delta = self.np_random.uniform(-0.08, 0.08, (2, ))
+        deltas.append(delta)
+      if np.linalg.norm(deltas[0] - deltas[1]) > 0.1:
+        break
+
+    if deltas[0][1] > deltas[1][1]:
+      t = deltas[0][1]
+      deltas[0][1] = deltas[1][1]
+      deltas[1][1] = t
+    for o in range(2):
+      object_qpos = self.sim.data.get_joint_qpos(f'object{o}:joint')
+      assert object_qpos.shape == (7, )
+      object_qpos[:2] += deltas[o]
+      self.sim.data.set_joint_qpos(f'object{o}:joint', object_qpos)
+
+    self.sim.forward()
+    return True
+
+  def _get_obs(self, force_original=False):
+
+    if self.raw_state and not force_original:
+      
+      obj_poses = []
+
+      for i in range(2):
+        obj_labl = 'object{}'.format(i)
+        obj_poses.append(self.sim.data.get_site_xpos(obj_labl))
+
+      return {
+        'observation': self.sim.get_state().flatten(),
+        'achieved_goal': np.concatenate(obj_poses),
+        'desired_goal': self.goal.copy(),
+      }
+
+    # positions
+    grip_pos = self.sim.data.get_site_xpos('robot0:grip')
+    dt = self.sim.nsubsteps * self.sim.model.opt.timestep
+    grip_velp = self.sim.data.get_site_xvelp('robot0:grip') * dt
+    robot_qpos, robot_qvel = utils.robot_get_obs(self.sim)
+
+    obj_feats = []
+    obj_poses = []
+
+    for i in range(2):
+      obj_labl = 'object{}'.format(i)
+      object_pos = self.sim.data.get_site_xpos(obj_labl)
+      # rotations
+      object_rot = rotations.mat2euler(self.sim.data.get_site_xmat(obj_labl))
+      # velocities
+      object_velp = (self.sim.data.get_site_xvelp(obj_labl) * dt)
+      object_velr = (self.sim.data.get_site_xvelr(obj_labl) * dt)
+      # gripper state
+
+      if self.smaller_state:
+        obj_feats.append([
+          object_pos,
+          object_velp[:2],
+        ])
+      else:
+        obj_feats.append([
+          object_pos,
+          object_rot,
+          object_velp,
+          object_velr,
+        ])
+      obj_poses.append(object_pos)
+
+    gripper_state = robot_qpos[-2:]
+    gripper_vel = robot_qvel[-2:] * dt  # change to a scalar if the gripper is made symmetric
+    achieved_goal = np.concatenate(obj_poses)
+
+    if self.smaller_state:
+      obs = np.concatenate([grip_pos, grip_velp] + sum(obj_feats, []))
+    else:
+      obs = np.concatenate([grip_pos, gripper_state, grip_velp, gripper_vel] + sum(obj_feats, []))
+
+    return {
+        'observation': obs.copy(),
+        'achieved_goal': achieved_goal.copy(),
+        'desired_goal': self.goal.copy(),
+    }
+
+
+  def compute_reward(self, achieved_goal, goal, info):
+    # Compute distance between goal and the achieved goal.
+
+    if len(achieved_goal.shape) == 1:
+      actual_goals = np.split(goal, 2)
+      achieved_goals = np.split(achieved_goal, 2)
+      success = 1.
+      on_table_bonus = np.clip(0.5 - np.abs(info['s'][2] - 0.42)*5., 0., 0.5)
+    else:
+      actual_goals = np.split(goal, 2, axis=1)
+      achieved_goals = np.split(achieved_goal, 2, axis=1)
+      success = np.ones(achieved_goal.shape[0], dtype=np.float32)
+      on_table_bonus = np.clip(0.5 - np.abs(info['s'][:,2] - 0.42)*5., 0., 0.5)
+
+    farness_penalty = 0
+    for b, g in zip(achieved_goals, actual_goals):
+      d = goal_distance(b, g)
+      success *= (d <= self.distance_threshold).astype(np.float32)
+      farness_penalty += np.clip(d / self.distance_threshold, 0., 1.)*0.1
+
+    on_table_bonus *= (1. - success)
+
+    return np.clip(success - 1. - farness_penalty + on_table_bonus, -1., 0.)  
+
+  def step(self, action):
+    action = np.clip(action, self.action_space.low, self.action_space.high)
+    self._set_action(action)
+    self.sim.step()
+    self._step_callback()
+    obs = self._get_obs()
+
+    done = False
+    info = {
+        's': obs['observation'], 
+        'a':action,
+        'is_success': self._is_success(obs['achieved_goal'], self.goal),
+    }
+    reward = self.compute_reward(obs['achieved_goal'], self.goal, info)
+
+    self.num_step += 1
+    done = True if self.num_step >= self.max_step else False
+    if done: info['TimeLimit.truncated'] = True
+
+    info['is_success'] = np.abs(reward) < 0.3
+
+    return obs, reward, done, info
+
+  def reset(self):
+    self._goal_pos = self._sample_goal()
+    self.num_step = 0
+    obs = super().reset()
+    return obs
+
+  def _env_setup(self, initial_qpos):
+    for name, value in initial_qpos.items():
+      self.sim.data.set_joint_qpos(name, value)
+    utils.reset_mocap_welds(self.sim)
+    self.sim.forward()
+
+    gripper_target = np.array([-0.498, 0.005, -0.431 + self.gripper_extra_height
+                                ]) + self.sim.data.get_site_xpos('robot0:grip')
+    gripper_rotation = np.array([1., 0., 1., 0.])
+    self.sim.data.set_mocap_pos('robot0:mocap', gripper_target)
+    self.sim.data.set_mocap_quat('robot0:mocap', gripper_rotation)
+    for _ in range(10):
+      self.sim.step()
+

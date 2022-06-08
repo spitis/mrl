@@ -4,7 +4,7 @@ from mrl import Agent, Module, config_to_agent
 
 # Utils
 from mrl.utils.networks import *
-from mrl.utils.misc import AttrDict, add_config_args, merge_args_into_config, make_agent_name, make_activ
+from mrl.utils.misc import AttrDict, add_config_args, merge_args_into_config, make_agent_name, make_activ, str2bool
 
 # Replays
 from mrl.replays.online_her_buffer import OnlineHERBuffer
@@ -21,7 +21,7 @@ from mrl.modules.curiosity import *
 from mrl.modules.density import *
 from mrl.modules.env import EnvModule, FirstVisitDoneWrapper
 from mrl.modules.eval import EpisodicEval
-from mrl.modules.goal_reward import GoalEnvReward, NeighborReward
+from mrl.modules.goal_modules import *
 from mrl.modules.logging import Logger, colorize
 from mrl.modules.model import PytorchModel
 from mrl.modules.normalizer import *

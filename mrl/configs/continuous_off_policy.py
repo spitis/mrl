@@ -42,7 +42,7 @@ default_ddpg_config = lambda: AnnotatedAttrDict(
     replay_size=(int(1e6), 'maximum size of replay buffer'),
     save_replay_buf=(False, 'save replay buffer checkpoint during training?'),
     num_envs=(12, 'number of parallel envs to run'),
-    num_eval_envs=(1, 'number of parallel eval envs to run'),
+    num_eval_envs=(10, 'number of parallel eval envs to run'),
     log_every=(5000, 'how often to log things'),
     varied_action_noise=(False, 'if true, action noise for each env in vecenv is interpolated between 0 and action noise'),
     use_actor_target=(False, 'if true, use actor target network to act in the environment'),
@@ -51,7 +51,9 @@ default_ddpg_config = lambda: AnnotatedAttrDict(
     future_warm_up=(25000, 'minimum steps in replay buffer needed to stop doing ONLY future sampling'),  
     sparse_reward_shaping=(0., 'coefficient of euclidean distance reward shaping in sparse goal envs'),
     n_step_returns=(1, 'if using n-step returns, how many steps?'),
-    slot_based_state=(False, 'if state is organized by slot; i.e., [batch_size, num_slots, slot_feats]')
+    slot_based_state=(False, 'if state is organized by slot; i.e., [batch_size, num_slots, slot_feats]'),
+    modalities=(['observation'], 'keys the agent accesses in dictionary env for observations'),
+    goal_modalities=(['desired_goal'], 'keys the agent accesses in dictionary env for goals')
 )
 
 def protoge_config():
@@ -79,9 +81,7 @@ def protoge_config():
 
 def best_slide_config():
   config = protoge_config()
-  config.batch_size = 1000
   config.eexplore = 0.2
-  config.action_noise = 0.1
   config.grad_value_clipping = -1
   config.her = 'futureactual_2_2'
   config.replay_size = int(2.5e6)

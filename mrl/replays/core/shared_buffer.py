@@ -4,6 +4,7 @@ from mrl.replays.core.replay_buffer import RingBuffer
 from mrl.utils.misc import AttrDict
 from multiprocessing import RawArray, RawValue
 from collections import OrderedDict
+from numpy.random import default_rng
 
 BUFF = None
 
@@ -15,6 +16,7 @@ def future_samples(idxs):
   """Assumes there is an 'ag' field, and samples n transitions, pairing each with a future ag
   from its trajectory."""
   global BUFF
+  rng = default_rng()
 
   # get original transitions
   transition = []
@@ -24,7 +26,7 @@ def future_samples(idxs):
 
   # add random future goals
   tlefts = BUFF.buffer_tleft.get_batch(idxs)
-  idxs = idxs + np.round(np.random.uniform(size=len(idxs)) * tlefts).astype(np.int64)
+  idxs = idxs + (rng.uniform(size=len(idxs)) * tlefts).round().astype(np.int64)
   ags = BUFF.buffer_ag.get_batch(idxs)
   transition.append(ags)
   return transition

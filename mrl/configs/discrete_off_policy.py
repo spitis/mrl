@@ -40,7 +40,9 @@ default_dqn_config = lambda: AnnotatedAttrDict(
     future_warm_up=(20000, 'minimum steps in replay buffer needed to stop doing ONLY future sampling'),  
     sparse_reward_shaping=(0., 'coefficient of euclidean distance reward shaping in sparse goal envs'),
     n_step_returns=(1, 'if using n-step returns, how many steps?'),
-    slot_based_state=(False, 'if state is organized by slot; i.e., [batch_size, num_slots, slot_feats]')
+    slot_based_state=(False, 'if state is organized by slot; i.e., [batch_size, num_slots, slot_feats]'),
+    modalities=(['observation'], 'keys the agent accesses in dictionary env for observations'),
+    goal_modalities=(['desired_goal'], 'keys the agent accesses in dictionary env for goals')
 )
 
 def dqn_config():

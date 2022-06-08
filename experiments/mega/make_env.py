@@ -1,10 +1,11 @@
 import gym, numpy as np
 
-from envs.customfetch.custom_fetch import PushEnv, SlideEnv, PickPlaceEnv, GoalType, StackEnv, PushLeft, PushRight, SlideNEnv
+from envs.customfetch.custom_fetch import FetchHookSweepAllEnv, PushEnv, SlideEnv, PickPlaceEnv, GoalType, StackEnv, PushLeft, PushRight, SlideNEnv, DictPush, DictPushAndReach, FetchHookSweepAllEnv
 from envs.customfetch.custom_hand import HandBlockEnv, HandPenEnv, HandEggEnv, HandReachFullEnv
 from envs.customfetch.epsilon_wrapper import EpsilonWrapper
 from envs.sibrivalry.toy_maze import PointMaze2D, SimpleMazeEnv
 from envs.sibrivalry.ant_maze import AntMazeEnv
+from gym.wrappers import TimeLimit
 from envs.goalgan.ant_maze import AntMazeEnv as GGAntMaze
 try:
   import envs.spritelu
@@ -23,6 +24,12 @@ def make_env(args):
   if gym.envs.registry.env_specs.get(args.env) is not None:
     env_fn = lambda: gym.make(args.env)
     eval_env_fn = env_fn
+  elif 'dictpushandreach' in args.env.lower():
+    env_fn = lambda: TimeLimit(DictPushAndReach(), 50)
+    eval_env_fn = lambda: TimeLimit(DictPushAndReach(), 50)
+  elif 'dictpush' in args.env.lower():
+    env_fn = lambda: TimeLimit(DictPush(), 50)
+    eval_env_fn = lambda: TimeLimit(DictPush(), 50)
   elif 'pointmaze' in args.env.lower():
     env_fn = lambda: PointMaze2D()
     eval_env_fn = lambda: PointMaze2D(test=True)
@@ -103,6 +110,12 @@ def make_env(args):
   elif args.env.lower()=='pushleft_pushleft':
       env_fn = lambda: PushLeft()
       eval_env_fn = lambda: PushLeft()
+  elif args.env.lower()=='sweep2':
+      env_fn = lambda: FetchHookSweepAllEnv(place_two=True)
+      eval_env_fn = lambda: FetchHookSweepAllEnv(place_two=True)
+  elif args.env.lower()=='sweep':
+      env_fn = lambda: FetchHookSweepAllEnv(smaller_state=True, place_two=True, place_random=False)
+      eval_env_fn = lambda: FetchHookSweepAllEnv(smaller_state=True, place_two=True, place_random=False)
   else:
     env, external, internal = args.env.split('_')
     if external.lower() == 'all':

@@ -119,8 +119,8 @@ class AchievedGoalCuriosity(mrl.Module):
       self.current_goals = experience.reset_state['desired_goal']
 
     computed_reward = self.env.compute_reward(experience.next_state['achieved_goal'], self.current_goals, 
-      {'s':experience.state['observation'], 'ns':experience.next_state['observation']})
-    close = computed_reward > -0.5
+      {'s':experience.state['observation'], 'a':experience.action, 'ns':experience.next_state['observation']})
+    close = computed_reward > -0.15
 
     # First, manage the episode resets & any special behavior that occurs on goal achievement, like go explore / resets / overshooting
     reset_idxs, overshooting_idxs, overshooting_proposals = self._manage_resets_and_success_behaviors(experience, close)
@@ -227,6 +227,7 @@ class AchievedGoalCuriosity(mrl.Module):
           self.is_success[i] = 0.
 
   def compute_q(self, numpy_states):
+    numpy_states = self.state_normalizer(numpy_states, update=False).astype(np.float32)
     states = self.torch(numpy_states)
     max_actions = self.actor(states)
     if isinstance(max_actions, tuple):

@@ -49,23 +49,18 @@ class RawKernelDensity(mrl.Module):
       self.ready = True
       sample_idxs = np.random.randint(len(buffer), size=self.samples)
       kde_samples = buffer.get_batch(sample_idxs)
-      #og_kde_samples = kde_samples
 
       if self.normalize:
         self.kde_sample_mean = np.mean(kde_samples, axis=0, keepdims=True)
         self.kde_sample_std  = np.std(kde_samples, axis=0, keepdims=True) + 1e-4
         kde_samples = (kde_samples - self.kde_sample_mean) / self.kde_sample_std
 
-      #if self.item == 'ag' and hasattr(self, 'ag_interest') and self.ag_interest.ready:
-      #  ag_weights = self.ag_interest.evaluate_disinterest(og_kde_samples)
-      #  self.fitted_kde = self.kde.fit(kde_samples, sample_weight=ag_weights.flatten())
-      #else:
       self.fitted_kde = self.kde.fit(kde_samples)
 
       # Now also log the entropy
       if self.log_entropy and hasattr(self, 'logger') and self.step % 250 == 0:
-        # Scoring samples is a bit expensive, so just use 1000 points
-        num_samples = 1000
+        # Scoring samples is a bit expensive, so just use 500 points
+        num_samples = 500
         s = self.fitted_kde.sample(num_samples)
         entropy = -self.fitted_kde.score(s)/num_samples + np.log(self.kde_sample_std).sum()
         self.logger.add_scalar('Explore/{}_entropy'.format(self.module_name), entropy, log_every=500)

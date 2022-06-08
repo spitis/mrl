@@ -34,6 +34,8 @@ def _worker(remote, parent_remote, env_fn_wrapper):
         remote.send(getattr(env, data))
       elif cmd == 'set_attr':
         remote.send(setattr(env, data[0], data[1]))
+      elif cmd == '_sample_goal':
+        remote.send(env._sample_goals())
       else:
         raise NotImplementedError
     except EOFError:

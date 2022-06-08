@@ -1,61 +1,53 @@
 # 1. Imports
 from mrl.import_all import *
-from mrl.modules.train import debug_vectorized_experience
 from experiments.mega.make_env import make_env
 import time
-import os
-import gym
 import numpy as np
-import torch.nn as nn
-
-class SweepSafetyInterest(mrl.Module):
-  """
-  Prevents agent from setting goals that are too far out of the desired goal dist. 
-  """
-  def __init__(self):
-    super().__init__('ag_interest', required_agent_modules=[], locals=locals())
-    self.lower_bounds = np.array([1.35, 0.55, 0.415, 1.35, 0.55, 0.415])
-    self.upper_bounds = np.array([2.35, 0.95, 0.8, 2.35, 0.95, 0.8])
-    
-  @property
-  def ready(self):
-    return True
-  
-  def evaluate_log_interest(self, ags):
-    # baseline is approx. avg density of demo ags == to scale the interest to "max_interest_factor"
-    shaped_ags = ags.reshape(-1, 6)
-    above_lower_bound = shaped_ags > self.lower_bounds
-    below_upper_bound = shaped_ags < self.upper_bounds
-    in_bounds = np.logical_and(above_lower_bound, below_upper_bound)
-    in_bounds = in_bounds.reshape(ags.shape[0], -1)
-    in_bounds = np.all(in_bounds, axis=1).astype(np.float32)
-    interest = (in_bounds - 1.) * 1e6
-
-    return interest
+import torch, torch.nn as nn
 
 # 2. Get default config and update any defaults (this automatically updates the argparse defaults)
-config = protoge_config()
+config = best_slide_config()
 
 # 3. Make changes to the argparse below
-
 def main(args):
 
   # 4. Update the config with args, and make the agent name. 
   if args.num_envs is None:
     import multiprocessing as mp
     args.num_envs = max(mp.cpu_count() - 1, 1)
-
   merge_args_into_config(args, config)
+
+  torch.set_num_threads(min(8, args.num_envs))
+  torch.set_num_interop_threads(min(8, args.num_envs))
   
   if config.gamma < 1.: config.clip_target_range = (np.round(-(1 / (1-config.gamma)), 2), 0.)
   if config.gamma == 1: config.clip_target_range = (np.round(- args.env_max_step - 5, 2), 0.)
-
-  if args.sparse_reward_shaping:
+  if args.sparse_reward_shaping or 'sac' in args.alg.lower():
     config.clip_target_range = (-np.inf, np.inf)
 
-  config.agent_name = make_agent_name(config, ['env','alg','her','layers','seed','tb','ag_curiosity','eexplore','first_visit_succ', 'dg_score_multiplier','alpha'], prefix=args.prefix)
+  config.agent_name = make_agent_name(config, ['env','alg','tb', 'seed'], prefix=args.prefix)
 
-  # 5. Setup / add basic modules to the config
+  # 6. Setup environments & add them to config, so modules can refer to them if need be
+  env, eval_env = make_env(args)
+  if args.first_visit_done: 
+    env1, eval_env1 = env, eval_env
+    env = lambda: FirstVisitDoneWrapper(env1()) # Terminates the training episode on "done"
+    eval_env = lambda: FirstVisitDoneWrapper(eval_env1())
+  if args.first_visit_succ:
+    config.first_visit_succ = True  # Continues the training episode on "done", but counts it as if "done" (gamma = 0)
+  if 'dictpush' in args.env.lower():
+    config.modalities = ['gripper', 'object', 'relative']
+    if 'reach' in args.env.lower():
+      config.goal_modalities = ['gripper_goal', 'object_goal']
+    else:
+      config.goal_modalities = ['desired_goal']
+    config.achieved_goal = GoalEnvAchieved()
+  config.train_env = EnvModule(env, num_envs=args.num_envs, seed=args.seed, modalities=config.modalities, goal_modalities=config.goal_modalities)
+  config.eval_env = EnvModule(eval_env, num_envs=args.num_eval_envs, name='eval_env', seed=args.seed + 1138, modalities=config.modalities, goal_modalities=config.goal_modalities)
+
+  # 7. Setup / add modules to the config
+
+  # Base Modules
   config.update(
       dict(
           trainer=StandardTrain(),
@@ -66,63 +58,34 @@ def main(args):
           replay=OnlineHERBuffer(),
       ))
 
-  config.prioritized_mode = args.prioritized_mode
-  if config.prioritized_mode == 'mep':
-    config.prioritized_replay = EntropyPrioritizedOnlineHERBuffer()
-
-  if args.sweep_safety_interest:
-    assert 'sweep' in args.env
-    config.ag_interest = SweepSafetyInterest()
-
-  if not args.no_ag_kde:
-    config.ag_kde = RawKernelDensity('ag', optimize_every=1, samples=10000, kernel=args.kde_kernel, bandwidth = args.bandwidth, log_entropy=True)
+  # Goal Selection Modules
   if args.ag_curiosity is not None:
-    config.dg_kde = RawKernelDensity('dg', optimize_every=500, samples=10000, kernel='tophat', bandwidth = 0.2)
-    config.ag_kde_tophat = RawKernelDensity('ag', optimize_every=100, samples=10000, kernel='tophat', bandwidth = 0.2, tag='_tophat')
+    config.ag_kde = RawKernelDensity('ag', optimize_every=4, samples=2000, kernel=args.kde_kernel, bandwidth = args.bandwidth, log_entropy=True)
+    config.dg_kde = RawKernelDensity('dg', optimize_every=500, samples=5000, kernel='tophat', bandwidth = 0.2)
+    config.ag_kde_tophat = RawKernelDensity('ag', optimize_every=100, samples=5000, kernel='tophat', bandwidth = 0.2, tag='_tophat')
     if args.transition_to_dg:
       config.alpha_curiosity = CuriosityAlphaMixtureModule()
-    if 'rnd' in args.ag_curiosity:
-      config.ag_rnd = RandomNetworkDensity('ag')
-    if 'flow' in args.ag_curiosity:
-      config.ag_flow = FlowDensity('ag')
 
     use_qcutoff = not args.no_cutoff
 
-    if args.ag_curiosity == 'minq':
-      config.ag_curiosity = QAchievedGoalCuriosity(max_steps = args.env_max_step, num_sampled_ags=args.num_sampled_ags, use_qcutoff=use_qcutoff, keep_dg_percent=args.keep_dg_percent)
-    elif args.ag_curiosity == 'randq':
-      config.ag_curiosity = QAchievedGoalCuriosity(max_steps = args.env_max_step, randomize=True, num_sampled_ags=args.num_sampled_ags, use_qcutoff=use_qcutoff, keep_dg_percent=args.keep_dg_percent)
-    elif args.ag_curiosity == 'minkde':
+    if args.ag_curiosity == 'minkde':
       config.ag_curiosity = DensityAchievedGoalCuriosity(max_steps = args.env_max_step, num_sampled_ags=args.num_sampled_ags, use_qcutoff=use_qcutoff, keep_dg_percent=args.keep_dg_percent)
-    elif args.ag_curiosity == 'minrnd':
-      config.ag_curiosity = DensityAchievedGoalCuriosity('ag_rnd', max_steps = args.env_max_step, num_sampled_ags=args.num_sampled_ags, use_qcutoff=use_qcutoff, keep_dg_percent=args.keep_dg_percent)
-    elif args.ag_curiosity == 'minflow':
-      config.ag_curiosity = DensityAchievedGoalCuriosity('ag_flow', max_steps = args.env_max_step, num_sampled_ags=args.num_sampled_ags, use_qcutoff=use_qcutoff, keep_dg_percent=args.keep_dg_percent)
-    elif args.ag_curiosity == 'randkde':
-      config.ag_curiosity = DensityAchievedGoalCuriosity(alpha = args.alpha, max_steps = args.env_max_step, randomize=True, num_sampled_ags=args.num_sampled_ags, use_qcutoff=use_qcutoff, keep_dg_percent=args.keep_dg_percent)
-    elif args.ag_curiosity == 'randrnd':
-      config.ag_curiosity = DensityAchievedGoalCuriosity('ag_rnd', alpha = args.alpha, max_steps = args.env_max_step, num_sampled_ags=args.num_sampled_ags, use_qcutoff=use_qcutoff, keep_dg_percent=args.keep_dg_percent)
-    elif args.ag_curiosity == 'randflow':
-      config.ag_curiosity = DensityAchievedGoalCuriosity('ag_flow', alpha = args.alpha, max_steps = args.env_max_step, num_sampled_ags=args.num_sampled_ags, use_qcutoff=use_qcutoff, keep_dg_percent=args.keep_dg_percent)
-    elif args.ag_curiosity == 'goaldisc':
-      config.success_predictor = GoalSuccessPredictor(batch_size=args.succ_bs, history_length=args.succ_hl, optimize_every=args.succ_oe)
-      config.ag_curiosity = SuccessAchievedGoalCuriosity(max_steps=args.env_max_step, use_qcutoff=use_qcutoff, keep_dg_percent=args.keep_dg_percent)
-    elif args.ag_curiosity == 'entropygainscore':
-      config.bg_kde = RawKernelDensity('bg', optimize_every=args.env_max_step, samples=10000, kernel=args.kde_kernel, bandwidth = args.bandwidth, log_entropy=True)
-      config.bgag_kde = RawJointKernelDensity(['bg','ag'], optimize_every=args.env_max_step, samples=10000, kernel=args.kde_kernel, bandwidth = args.bandwidth, log_entropy=True)
-      config.ag_curiosity = EntropyGainScoringGoalCuriosity(max_steps=args.env_max_step, use_qcutoff=use_qcutoff, keep_dg_percent=args.keep_dg_percent)
     else:
       raise NotImplementedError
 
+  # Action Noise Modules
   if args.noise_type.lower() == 'gaussian': noise_type = GaussianProcess
   if args.noise_type.lower() == 'ou': noise_type = OrnsteinUhlenbeckProcess
   config.action_noise = ContinuousActionNoise(noise_type, std=ConstantSchedule(args.action_noise))
 
+  # Algorithm Modules
   if args.alg.lower() == 'ddpg': 
     config.algorithm = DDPG()
   elif args.alg.lower() == 'td3':
     config.algorithm = TD3()
     config.target_network_update_freq *= 2
+  elif args.alg.lower() == 'sac':
+    config.algorithm = SAC()
   elif args.alg.lower() == 'dqn': 
     config.algorithm = DQN()
     config.policy = QValuePolicy()
@@ -133,39 +96,31 @@ def main(args):
   else:
     raise NotImplementedError
 
-  # 6. Setup / add the environments and networks (which depend on the environment) to the config
-  env, eval_env = make_env(args)
-  if args.first_visit_done:
-    env1, eval_env1 = env, eval_env
-    env = lambda: FirstVisitDoneWrapper(env1())
-    eval_env = lambda: FirstVisitDoneWrapper(eval_env1())
-  if args.first_visit_succ:
-    config.first_visit_succ = True
-
-  config.train_env = EnvModule(env, num_envs=args.num_envs, seed=args.seed)
-  config.eval_env = EnvModule(eval_env, num_envs=args.num_eval_envs, name='eval_env', seed=args.seed + 1138)
-
+  # 7. Actor/Critic Networks
   e = config.eval_env
   if args.alg.lower() == 'dqn':
-    config.qvalue = PytorchModel('qvalue', lambda: Critic(FCBody(e.state_dim + e.goal_dim, args.layers, nn.LayerNorm, make_activ(config.activ)), e.action_dim))
+    config.qvalue = PytorchModel('qvalue', lambda: Critic(FCBody(e.state_dim + e.goal_dim, args.layers, nn.Identity, make_activ(config.activ)), e.action_dim))
   else:
     config.actor = PytorchModel('actor',
-                                lambda: Actor(FCBody(e.state_dim + e.goal_dim, args.layers, nn.LayerNorm, make_activ(config.activ)), e.action_dim, e.max_action))
+                                lambda: Actor(FCBody(e.state_dim + e.goal_dim, args.layers, nn.Identity, make_activ(config.activ)), e.action_dim, e.max_action))
     config.critic = PytorchModel('critic',
-                                lambda: Critic(FCBody(e.state_dim + e.goal_dim + e.action_dim, args.layers, nn.LayerNorm, make_activ(config.activ)), 1))
-    if args.alg.lower() == 'td3':
+                                lambda: Critic(FCBody(e.state_dim + e.goal_dim + e.action_dim, args.layers, nn.Identity, make_activ(config.activ)), 1))
+    if args.alg.lower() in ['td3', 'sac']:
       config.critic2 = PytorchModel('critic2',
-        lambda: Critic(FCBody(e.state_dim + e.goal_dim + e.action_dim, args.layers, nn.LayerNorm, make_activ(config.activ)), 1))
-
-  if args.ag_curiosity == 'goaldisc':
-    config.goal_discriminator = PytorchModel('goal_discriminator', lambda: Critic(FCBody(e.state_dim + e.goal_dim, args.layers, nn.LayerNorm, make_activ(config.activ)), 1))
-
+        lambda: Critic(FCBody(e.state_dim + e.goal_dim + e.action_dim, args.layers, nn.Identity, make_activ(config.activ)), 1))
+    if args.alg.lower() == 'sac':
+      del config.actor
+      config.actor = PytorchModel('actor', lambda: StochasticActor(FCBody(e.state_dim + e.goal_dim, args.layers, nn.Identity, make_activ(config.activ)), 
+                                       e.action_dim, e.max_action, log_std_bounds = (-20, 2)))
+      del config.policy
+      config.policy = StochasticActorPolicy()
+  
+  # 8. Reward modules
   if args.reward_module == 'env':
     config.goal_reward = GoalEnvReward()
   elif args.reward_module == 'intrinsic':
     config.goal_reward = NeighborReward()
-    config.neighbor_embedding_network = PytorchModel('neighbor_embedding_network',
-                                                     lambda: FCBody(e.goal_dim, (256, 256)))
+    config.neighbor_embedding_network = PytorchModel('neighbor_embedding_network', lambda: FCBody(e.goal_dim, (256, 256)))
   else:
     raise ValueError('Unsupported reward module: {}'.format(args.reward_module))
 
@@ -173,10 +128,15 @@ def main(args):
     if not (args.first_visit_done or args.first_visit_succ):
       config.never_done = True  # NOTE: This is important in the standard Goal environments, which are never done
 
-
-  # 7. Make the agent and run the training loop.
+  # 9. Make the agent
   agent = mrl.config_to_agent(config)
 
+  if args.checkpoint_dir is not None:
+    # If a checkpoint has been initialized load it.
+    if os.path.exists(os.path.join(args.checkpoint_dir, 'INITIALIZED')):
+      agent.load_from_checkpoint(args.checkpoint_dir)
+
+  # 10.A Vizualize a trained agent
   if args.visualize_trained_agent:
     print("Loading agent at epoch {}".format(0))
     agent.load('checkpoint')
@@ -200,48 +160,8 @@ def main(args):
           state, reward, done, info = env.step(action)
           env.render()
           print(reward[0])
-  elif args.collect_noisy_expert:
-    print("Loading agent at epoch {}".format(0))
-    agent.load('checkpoint')
-    agent.eval_mode()
-    env = agent.eval_env
-    raw_env = agent.eval_env.env.envs[0]
 
-    collected_exps = [] # will be tuples of (s, a, s', r, d)
-
-    while (len(collected_exps) < 500000):
-      print(len(collected_exps))
-      state = env.reset()
-
-      raw_env.smaller_state = True
-      state1 = raw_env._get_obs()['observation']
-      raw_env.smaller_state = False
-
-      #env.render()
-      done = False
-      n_steps = 0
-      while n_steps < 50:
-        n_steps += 1
-        action = agent.policy(state, )
-        if np.random.random() < 0.5:
-          action = agent.action_noise(action)
-        next_state, reward, done, info = env.step(action)
-        #env.render()
-        
-        raw_env.smaller_state = True
-        next_state1 = raw_env._get_obs()['observation']
-        raw_env.smaller_state = False
-
-        collected_exps.append((state1, action, next_state1, reward, done))
-        state = next_state
-        state1 = next_state1
-      print([i['is_success'] for i in info])
-
-    import pickle
-    with open(os.path.join(agent.config.parent_folder, 'noisy_expert_buffer1.pickle'), 'wb') as f:
-      pickle.dump(collected_exps, f)
-    print('done & saved!')
-
+  # 10.B Or run the training loop
   else:
     ag_buffer = agent.replay_buffer.buffer.BUFF.buffer_ag
     bg_buffer = agent.replay_buffer.buffer.BUFF.buffer_bg
@@ -269,6 +189,10 @@ def main(args):
 
       print("Saving agent at epoch {}".format(epoch))
       agent.save('checkpoint')
+      
+      # Also save to checkpoint if a checkpoint_dir is specified.
+      if args.checkpoint_dir is not None:
+        agent.save_checkpoint(args.checkpoint_dir)
 
 
 # 3. Declare args for modules (also parent_folder is required!)
@@ -276,12 +200,12 @@ if __name__ == '__main__':
   import argparse
   parser = argparse.ArgumentParser(description="Train DDPG", formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, max_help_position=100, width=120))
   parser.add_argument('--parent_folder', default='/tmp/test_mega', type=str, help='where to save progress')
-  parser.add_argument('--prefix', type=str, default='proto', help='Prefix for agent name (subfolder where it is saved)')
-  parser.add_argument('--env', default="FetchPush-v1", type=str, help="gym environment")
-  parser.add_argument('--max_steps', default=5000000, type=int, help="maximum number of training steps")
+  parser.add_argument('--prefix', type=str, default='mrl', help='Prefix for agent name (subfolder where it is saved)')
+  parser.add_argument('--env', default="FetchReach-v1", type=str, help="gym environment")
+  parser.add_argument('--max_steps', default=1000000, type=int, help="maximum number of training steps")
   parser.add_argument('--alg', default='DDPG', type=str, help='algorithm to use (DDPG or TD3)')
   parser.add_argument(
-      '--layers', nargs='+', default=(512,512,512), type=int, help='sizes of layers for actor/critic networks')
+      '--layers', nargs='+', default=(512,512), type=int, help='sizes of layers for actor/critic networks')
   parser.add_argument('--noise_type', default='Gaussian', type=str, help='type of action noise (Gaussian or OU)')
   parser.add_argument('--tb', default='', type=str, help='a tag for the agent name / tensorboard')
   parser.add_argument('--epoch_len', default=5000, type=int, help='number of steps between evals')
@@ -319,11 +243,9 @@ if __name__ == '__main__':
   parser.add_argument('--visualize_trained_agent', action='store_true', help="visualize the trained agent")
   parser.add_argument('--intrinsic_visualization', action='store_true', help="if visualized agent should act intrinsically; requires saved replay buffer!")
   parser.add_argument('--keep_dg_percent', default=-1e-1, type=float, help='Percentage of time to keep desired goals')
-  parser.add_argument('--prioritized_mode', default='none', type=str, help='Modes for prioritized replay: none, mep (default: none)')
-  parser.add_argument('--no_ag_kde', action='store_true', help="don't track ag kde")
 
-  parser.add_argument('--sweep_safety_interest', action='store_true')
-  parser.add_argument('--collect_noisy_expert', action='store_true', help="collect a buffer from a noisy expert")
+  # Checkpoint directory for slurm preemptions
+  parser.add_argument('--checkpoint_dir', default=None, help='checkpoint directory, if any')
 
   parser = add_config_args(parser, config)
   args = parser.parse_args()

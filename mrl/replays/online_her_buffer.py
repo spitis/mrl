@@ -4,7 +4,7 @@ from mrl.replays.core.shared_buffer import SharedMemoryTrajectoryBuffer as Buffe
 import numpy as np
 import pickle
 import os
-from mrl.utils.misc import batch_block_diag
+from mrl.utils.misc import flatten_state
 
 class OnlineHERBuffer(mrl.Module):
 
@@ -14,35 +14,40 @@ class OnlineHERBuffer(mrl.Module):
     ):
     """
     Buffer that does online hindsight relabeling.
-    Replaces the old combo of ReplayBuffer + HERBuffer.
     """
 
     super().__init__(module_name, required_agent_modules=['env'], locals=locals())
 
     self.size = None
-    self.goal_space = None
+    self.goal_shape = None
     self.buffer = None
-    self.save_buffer = None
+    self.save_buffer = None # can be manually set to save this replay buffer irrespective of config
+    self.modalities = ['observation']
+    self.goal_modalities = ['desired_goal']
     
   def _setup(self):
     self.size = self.config.replay_size
 
     env = self.env
+
     if type(env.observation_space) == gym.spaces.Dict:
-      observation_space = env.observation_space.spaces["observation"]
-      self.goal_space = env.observation_space.spaces["desired_goal"]
+      if env.goal_env:
+        self.goal_modalities = [m for m in self.config.goal_modalities]
+        self.goal_shape = (env.goal_dim,)
+      state_shape = (env.state_dim,)
+      self.modalities = [m for m in self.config.modalities]
     else:
-      observation_space = env.observation_space
+      state_shape = env.observation_space.shape
 
-    items = [("state", observation_space.shape),
+    items = [("state", state_shape),
              ("action", env.action_space.shape), ("reward", (1,)),
-             ("next_state", observation_space.shape), ("done", (1,))]
+             ("next_state", state_shape), ("done", (1,))]
 
-    if self.goal_space is not None:
-      items += [("previous_ag", self.goal_space.shape), # for reward shaping
-                ("ag", self.goal_space.shape), # achieved goal
-                ("bg", self.goal_space.shape), # behavioral goal (i.e., intrinsic if curious agent)
-                ("dg", self.goal_space.shape)] # desired goal (even if ignored behaviorally)
+    if self.goal_shape is not None:
+      items += [("previous_ag", self.goal_shape), # for reward shaping
+                ("ag", self.goal_shape), # achieved goal
+                ("bg", self.goal_shape), # behavioral goal (i.e., intrinsic if curious agent)
+                ("dg", self.goal_shape)] # desired goal (even if ignored behaviorally)
 
     self.buffer = Buffer(self.size, items)
     self._subbuffers = [[] for _ in range(self.env.num_envs)]
@@ -59,18 +64,23 @@ class OnlineHERBuffer(mrl.Module):
       self.logger.add_tabular('Replay buffer size', len(self.buffer))
     done = np.expand_dims(exp.done, 1)  # format for replay buffer
     reward = np.expand_dims(exp.reward, 1)  # format for replay buffer
+
     action = exp.action
 
-    if self.goal_space:
-      state = exp.state['observation']
-      next_state = exp.next_state['observation']
-      previous_achieved = exp.state['achieved_goal']
-      achieved = exp.next_state['achieved_goal']
-      desired = exp.state['desired_goal']
+    if self.goal_shape:
+      state = flatten_state(exp.state, self.modalities)
+      next_state = flatten_state(exp.next_state, self.modalities)
+      if hasattr(self, 'achieved_goal'):
+        previous_achieved = self.achieved_goal(exp.state)
+        achieved = self.achieved_goal(exp.next_state)
+      else:
+        previous_achieved = exp.state['achieved_goal']
+        achieved = exp.next_state['achieved_goal']
+      desired = flatten_state(exp.state, self.goal_modalities)
       if hasattr(self, 'ag_curiosity') and self.ag_curiosity.current_goals is not None:
         behavioral = self.ag_curiosity.current_goals
         # recompute online reward
-        reward = self.env.compute_reward(achieved, behavioral, {'s':state, 'ns':next_state}).reshape(-1, 1)
+        reward = self.env.compute_reward(achieved, behavioral, {'s':state, 'a':action, 'ns':next_state}).reshape(-1, 1)
       else:
         behavioral = desired
       for i in range(self.n_envs):
@@ -97,7 +107,7 @@ class OnlineHERBuffer(mrl.Module):
     else:
       batch_idxs = np.random.randint(self.buffer.size, size=batch_size)
 
-    if self.goal_space:
+    if self.goal_shape:
       if "demo" in self.module_name:
         has_config_her = self.config.get('demo_her')
       else:
@@ -143,9 +153,9 @@ class OnlineHERBuffer(mrl.Module):
 
         # Recompute reward online
         if hasattr(self, 'goal_reward'):
-          rewards = self.goal_reward(ags, goals, {'s':states, 'ns':next_states}).reshape(-1, 1).astype(np.float32)
+          rewards = self.goal_reward(ags, goals, {'s':states, 'a':actions, 'ns':next_states}).reshape(-1, 1).astype(np.float32)
         else:
-          rewards = self.env.compute_reward(ags, goals, {'s':states, 'ns':next_states}).reshape(-1, 1).astype(np.float32)
+          rewards = self.env.compute_reward(ags, goals, {'s':states, 'a':actions, 'ns':next_states}).reshape(-1, 1).astype(np.float32)
 
         if self.config.get('never_done'):
           dones = np.zeros_like(rewards, dtype=np.float32)

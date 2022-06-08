@@ -30,7 +30,7 @@ class QValuePolicy(mrl.Module):
       elif hasattr(self, 'ag_curiosity'):
         state = self.ag_curiosity.relabel_state(state)
     
-    state = flatten_state(state)  # flatten goal environments
+    state = flatten_state(state, self.config.modalities + self.config.goal_modalities)  # flatten goal environments
     if hasattr(self, 'state_normalizer'):
       state = self.state_normalizer(state, update=self.training)
 

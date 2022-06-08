@@ -26,6 +26,8 @@ class EnvModule(mrl.Module):
       num_envs: int = 1,
       seed: Optional[int] = None,
       name: Optional[str] = None,
+      modalities = ['observation'],
+      goal_modalities = ['desired_goal'],
       episode_life=True  # for Atari
   ):
 
@@ -68,10 +70,20 @@ class EnvModule(mrl.Module):
     self.goal_dim = 0
 
     if isinstance(self.observation_space, gym.spaces.Dict):
-      self.goal_env = True
-      self.compute_reward = sample_env.compute_reward
-      self.state_dim = int(np.prod(self.env.observation_space['observation'].shape))
-      self.goal_dim = int(np.prod(self.env.observation_space['desired_goal'].shape))
+      if goal_modalities[0] in self.observation_space.spaces:
+        self.goal_env = True
+        self.compute_reward = sample_env.compute_reward
+        if hasattr(sample_env, 'achieved_goal'):
+          self.achieved_goal = sample_env.achieved_goal
+        for key in goal_modalities:
+          assert key in self.env.observation_space.spaces
+          self.goal_dim += int(np.prod(self.env.observation_space[key].shape))
+      state_dim = 0
+      for key in modalities:
+        if key == 'desired_goal': continue
+        assert key in self.env.observation_space.spaces
+        state_dim += int(np.prod(self.env.observation_space[key].shape))
+      self.state_dim = state_dim
     else:
       self.state_dim = int(np.prod(self.env.observation_space.shape))
 

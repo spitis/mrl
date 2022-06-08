@@ -8,6 +8,7 @@ def test_ddpg():
                                     parent_folder='/tmp/mrl',
                                     layers=(32, 1),
                                     num_envs=1,
+                                    num_eval_envs=1,
                                     device='cpu'))
   agent = mrl.config_to_agent(config)
 
