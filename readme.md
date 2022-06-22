@@ -80,7 +80,7 @@ Below is a list of papers that use `mrl`. If you use `mrl` in one of your papers
 
 - Maximum Entropy Gain Exploration for Long Horizon Multi-goal Reinforcement Learning (ICML 2020 ([15 minute presentation](https://icml.cc/virtual/2020/poster/6622)), [Arxiv](https://arxiv.org/abs/2007.02832), ALA 2020 Best Paper ([25 minute presentation](https://bit.ly/mega_ala))
 - ProtoGE: Prototype Goal Encodings for Multi-goal Reinforcement Learning (RLDM 2019, [pdf](https://takonan.github.io/docs/2019_protoge_rldm.pdf)) [As of July 2020, this is still far and away the state-of-the-art on Gym's Fetch environments]
-- Counterfactual Data Augmentation using Locally Factored Dynamics (Preprint, [Arxiv](http://arxiv.org/abs/2007.02832
+- Counterfactual Data Augmentation using Locally Factored Dynamics (NeurIPS 2020 ([3 minute presentation](https://crossminds.ai/video/counterfactual-data-augmentation-using-locally-factored-dynamics-5fb82261890833803bc7e7ef/), [5 minute presentation](https://crossminds.ai/video/counterfactual-data-augmentation-using-locally-factored-dynamics-606f4312072e523d7b7806e6/)), [Arxiv](http://arxiv.org/abs/2007.02832
 ))
 
 
