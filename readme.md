@@ -82,6 +82,7 @@ Below is a list of papers that use `mrl`. If you use `mrl` in one of your papers
 - ProtoGE: Prototype Goal Encodings for Multi-goal Reinforcement Learning (RLDM 2019, [pdf](https://takonan.github.io/docs/2019_protoge_rldm.pdf)) [As of July 2020, this is still far and away the state-of-the-art on Gym's Fetch environments]
 - Counterfactual Data Augmentation using Locally Factored Dynamics (NeurIPS 2020 ([3 minute presentation](https://crossminds.ai/video/counterfactual-data-augmentation-using-locally-factored-dynamics-5fb82261890833803bc7e7ef/), [5 minute presentation](https://crossminds.ai/video/counterfactual-data-augmentation-using-locally-factored-dynamics-606f4312072e523d7b7806e6/)), [Arxiv](http://arxiv.org/abs/2007.02832
 ))
+- Planning Goals for Exploration (ICLR 2023 Spotlight ([openreview](https://openreview.net/forum?id=6qeBuZSo7Pr))), [codebase (also implements model-based SkewFit)](https://github.com/penn-pal-lab/peg)
 
 
 ## Citing this Repository
